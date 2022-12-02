@@ -17,6 +17,7 @@ This plugin adds a toolbar with common Mermaid.js elements, so you won't have to
 Use ribbon icon or `Mermaid: Open Toolbar View` command to open the toolbar.
 
 Click on an element to paste it into editor.
+
 ![image](https://user-images.githubusercontent.com/36126057/205342717-a454097b-280e-4407-8029-a47fc45a80c8.png)
 
 Note: in toolbar panel, all elements are wrapped as complete diagrams for rendering purposes.
