@@ -1,32 +1,79 @@
 import { ItemView, WorkspaceLeaf } from "obsidian";
 import { TextEditorService } from "src/core/textEditorService";
-import { IMermaidToolbarItem } from "./IMermaidToolbarItem";
-import { MermaidToolbarItemCategory } from "./MermaidToolbaItemCategory";
+import { ElementCategory } from "../../core/ElementCategory";
+import {TRIDENT_ICON_NAME} from "main";
+import MermaidPlugin from "main";
+import { createMermaidToolbar } from "./viewHelpers";
+import { IMermaidElement } from "src/core/IMermaidElement";
+import { MermaidToolbarButton } from "./mermaidToolbarButtons";
 
-
-export class MermaidTolbarView extends ItemView {
+export class MermaidToolbarView extends ItemView {
     static readonly VIEW_TYPE = "mermaid-toolbar-view"; 
     static readonly VIEW_DESCRIPTION = "Mermaid Toolbar";
 
-    private _textEditorService: TextEditorService;
+    private _plugin: MermaidPlugin;
+    private items: IMermaidElement[];
 
-    private items: IMermaidToolbarItem[];
-    private current_category: MermaidToolbarItemCategory;
+    topRowButtons: MermaidToolbarButton[] = [
+        new MermaidToolbarButton(
+            "insert empty Mermaid code block",
+            "code-2", 
+            () => this.insertTextAtCursor("```mermaid\n\n```")
+        ),
+        new MermaidToolbarButton(
+            "open Mermaid.js documentation web page",
+            "external-link",
+            () => window.open("https://mermaid-js.github.io/mermaid/#/")
+        )
+    ]
 
-    /**
-     *
-     */
-    constructor(leaf: WorkspaceLeaf, textEditorService: TextEditorService) {
+    constructor(leaf: WorkspaceLeaf, plugin: MermaidPlugin) {
         super(leaf);
-        this._textEditorService = textEditorService;
+        this._plugin = plugin;
+        this.items = plugin.settings.elements;
+        this.containerEl.children[1].addClass("mermaid-toolbar-container");
+    }
+
+    async onOpen() {
+        await this.recreateToolbar(this._plugin.settings.selectedCategory);
+    }
+    
+    async onClose() {
+    // Nothing to clean up.
+    }
+
+    async recreateToolbar(selectedCategory: ElementCategory): Promise<any> {
+        const container = this.containerEl.children[1];
+        container.empty();
+
+        var toolbarElement = await createMermaidToolbar(
+            this.topRowButtons,
+            this.items, 
+            selectedCategory,
+            async (newCat) => {
+                this._plugin.settings.selectedCategory = newCat;
+                this._plugin.saveSettings();
+                await this.recreateToolbar(this._plugin.settings.selectedCategory);
+            },
+            text => this.insertTextAtCursor(text));
+        container.appendChild(toolbarElement);
+    }
+
+    private insertTextAtCursor(text: string) {
+        this._plugin.insertTextAtCursor(text);
     }
 
     getViewType(): string {
-        return MermaidTolbarView.VIEW_TYPE;
+        return MermaidToolbarView.VIEW_TYPE;
     }
     getDisplayText(): string {
-        return MermaidTolbarView.VIEW_DESCRIPTION;
+        return MermaidToolbarView.VIEW_DESCRIPTION;
     }
 
-    
+    getIcon(): string {
+        return TRIDENT_ICON_NAME;
+    }
+
+
 }
+
