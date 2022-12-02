@@ -1,10 +1,8 @@
 # Obsidian Mermaid
 [Mermaid.js](https://mermaid-js.github.io) lets you create diagrams and visualizations using text:
 
-```mermaid
-
+```
 Start ---> Stop
-
 ```
 
 will render as:
