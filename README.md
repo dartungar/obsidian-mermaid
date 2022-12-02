@@ -20,6 +20,10 @@ Click on an element to paste it into editor.
 
 ![image](https://user-images.githubusercontent.com/36126057/205342717-a454097b-280e-4407-8029-a47fc45a80c8.png)
 
+A small demo:
+![obsidian-mermaid-demo](https://user-images.githubusercontent.com/36126057/205345812-076004e7-637d-4bac-9489-cdd355ff82bf.gif)
+
+
 Note: in toolbar panel, all elements are wrapped as complete diagrams for rendering purposes.
 
 ### Roadmap:
