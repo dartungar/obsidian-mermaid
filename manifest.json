@@ -1,10 +1,10 @@
 {
-	"id": "obsidian-sample-plugin",
-	"name": "Sample Plugin",
-	"version": "1.0.0",
+	"id": "obsidian-mermaid",
+	"name": "Obsidian Mermaid",
+	"version": "0.0.3",
 	"minAppVersion": "0.15.0",
-	"description": "This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
+	"description": "Improved Mermaid.js experience for Obsidian: visual toolbar with common elements & more",
+	"author": "dartungar",
+	"authorUrl": "https://dartungar.com",
 	"isDesktopOnly": false
 }
