@@ -12,3 +12,8 @@ Click on an element to paste it into editor.
 plugin-example.jpg
 
 Note: in toolbar panel, all elements are wrapped as complete diagrams for rendering purposes.
+
+### Roadmap:
+- add/edit elements in settings
+- reorder elements in settings
+- UX improvements
