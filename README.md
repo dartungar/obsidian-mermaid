@@ -12,7 +12,10 @@ will render as:
 Obsidian supports Mermaid.js natively, via `mermaid` codeblocks.
 
 ## Toolbar
-This plugin adds a panel with common Mermaid.js elements, so you won't have to remember them.
+This plugin adds a toolbar with common Mermaid.js elements, so you won't have to remember them.
+
+Use ribbon icon or `Mermaid: Open Toolbar View` command to open the toolbar.
+
 Click on an element to paste it into editor.
 ![image](https://user-images.githubusercontent.com/36126057/205342717-a454097b-280e-4407-8029-a47fc45a80c8.png)
 
