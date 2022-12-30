@@ -61,10 +61,6 @@ function createDropdown(
             onSelectionChanged(val as ElementCategory);
             recreateElementsSection(elementsContainer, val as ElementCategory, items, onElClick);
         })
-        // dropdown.selectEl.addEventListener('change', () => {
-        //     onSelectionChanged(dropdown.selectEl.value as ElementCategory);
-        //     recreateElementsSection(elementsContainer, dropdown.selectEl.value as ElementCategory, items, onElClick);
-        // });
 }
 
 async function recreateElementsSection(
@@ -73,7 +69,6 @@ async function recreateElementsSection(
     items: IMermaidElement[], 
     onElClick: (elementContent: string) => void) 
 {
-        console.log("recreating element section", category, items)
         sectionContainer.innerHTML = '';
         let elemService = new MermaidElementService();
         let mermaid = await loadMermaid();
@@ -90,7 +85,6 @@ async function recreateElementsSection(
 }
 
 function createToolbarElement(parentEl: HTMLElement): HTMLElement {
-    //console.log("creating toolbar element with parent:", parentEl);
     let itemEl = parentEl.createEl("pre");
     itemEl.addClass(TOOLBAR_ELEMENT_CLASS_NAME);
     return itemEl;
