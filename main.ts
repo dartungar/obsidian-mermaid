@@ -1,4 +1,4 @@
-import {  Notice, Plugin } from 'obsidian';
+import {  Editor, Notice, Plugin } from 'obsidian';
 import { MermaidElementService } from 'src/core/elementService';
 import { TextEditorService } from 'src/core/textEditorService';
 import { MermaidPluginSettings } from 'src/settings/settings';
@@ -10,8 +10,9 @@ export const TRIDENT_ICON_NAME = "trident-custom";
 
 export default class MermaidPlugin extends Plugin {
 	settings: MermaidPluginSettings;
+	private activeEditor: Editor;
 	public _mermaidElementService = new MermaidElementService();
-    private _textEditorService = new TextEditorService(this.app);
+    private _textEditorService = new TextEditorService();
 	
     async onload(): Promise<void> {
         await this.loadSettings();
@@ -23,8 +24,11 @@ export default class MermaidPlugin extends Plugin {
 			(leaf) => new MermaidToolbarView(leaf, this)
 		);
 
+		// keep track of last active editor
+		// cannot simply call this.app.workspace.activeEditor ad hoc 
+		// because Editor will be null when using Mermaid toolbar view
 		this.registerDomEvent(document, 'click', () => {
-            this._textEditorService.updateEditor(this.app);
+            this.activeEditor = this.app.workspace.activeEditor?.editor ?? this.activeEditor;
         });
 
 		this.addRibbonIcon(TRIDENT_ICON_NAME, "Open Mermaid Toolbar", () => {
@@ -70,11 +74,6 @@ export default class MermaidPlugin extends Plugin {
 	}
 
 	public insertTextAtCursor(text: string) {
-		this._textEditorService.insertTextAtCursor(text);
+		this._textEditorService.insertTextAtCursor(this.activeEditor, text);
 	}
-
-	public showNotice(message: string) : void {
-		new Notice(message);
-	}
-
 }

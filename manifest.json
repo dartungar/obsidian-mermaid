@@ -2,7 +2,7 @@
 	"id": "obsidian-mermaid",
 	"name": "Obsidian Mermaid",
 	"version": "0.0.3",
-	"minAppVersion": "0.15.0",
+	"minAppVersion": "1.1.0",
 	"description": "Improved Mermaid.js experience for Obsidian: visual toolbar with common elements & more",
 	"author": "dartungar",
 	"authorUrl": "https://dartungar.com",

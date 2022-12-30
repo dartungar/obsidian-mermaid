@@ -9,25 +9,14 @@ export class NoActiveCursorError extends Error {
 }
 
 export class TextEditorService {
-    private _editor: Editor | undefined;
     private _elementService = new MermaidElementService();
 
-    constructor(app: App) {
-        this.updateEditor(app);
-    }
-
-    public insertTextAtCursor(content: string): void {
-        if (!this._editor) 
+    public insertTextAtCursor(editor: Editor, content: string): void {
+        if (!editor) 
             throw new NoActiveCursorError();
         content = this._elementService.wrapForPastingIntoEditor(content);
-        let cursor = this._editor.getCursor();
-        this._editor!!.replaceRange(content, cursor);
-        this._editor!!.setCursor(content.length);
-    }
-
-    public updateEditor(app: App) {
-        let newEditor = app.workspace.getActiveViewOfType(MarkdownView)?.editor;
-        if (!newEditor) return;
-        this._editor = newEditor;
+        let cursor = editor.getCursor();
+        editor.replaceRange(content, cursor);
+        editor.setCursor(content.length);
     }
 }
