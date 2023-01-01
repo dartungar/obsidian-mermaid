@@ -27,7 +27,7 @@ export default class MermaidPlugin extends Plugin {
 		// keep track of last active editor
 		// cannot simply call this.app.workspace.activeEditor ad hoc 
 		// because Editor will be null when using Mermaid toolbar view
-		this.registerDomEvent(document, 'click', () => {
+		this.app.workspace.on('active-leaf-change', (leaf) => {
             this.activeEditor = this.app.workspace.activeEditor?.editor ?? this.activeEditor;
         });
 
