@@ -27,6 +27,6 @@ A small demo:
 Note: in toolbar panel, all elements are wrapped as complete diagrams for rendering purposes.
 
 ### Roadmap:
-- add/edit elements in settings
+- add / edit elements in settings
 - reorder elements in settings
 - UX improvements
