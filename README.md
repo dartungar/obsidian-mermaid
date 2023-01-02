@@ -1,4 +1,4 @@
-# Obsidian Mermaid
+# Mermaid Tools for Obsidian.md
 [Mermaid.js](https://mermaid-js.github.io) lets you create diagrams and visualizations using text:
 
 ```
