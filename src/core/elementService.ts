@@ -1,3 +1,4 @@
+import { sampleDiagrams } from "src/elements/sampleDiagrams";
 import { defaultElements } from "../elements/defaultElements"
 import { ElementCategory } from "./ElementCategory";
 import { IMermaidElement } from "./IMermaidElement";
@@ -23,6 +24,10 @@ let wrappingsForElementCategories: Record<ElementCategory, IWrappingData> = {
 export class MermaidElementService {
     static DefaultElements() {
         return defaultElements;
+    }
+
+    public getSampleDiagram(category: ElementCategory): string {
+        return this.wrapForPastingIntoEditor(this.wrapWithMermaidBlock(sampleDiagrams[category]));
     }
 
     public wrapForPastingIntoEditor(text: string): string {

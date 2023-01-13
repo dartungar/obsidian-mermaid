@@ -16,9 +16,11 @@ export class MermaidToolbarView extends ItemView {
 
     topRowButtons: MermaidToolbarButton[] = [
         new MermaidToolbarButton(
-            "insert empty Mermaid code block",
+            "insert Mermaid code block with sample diagram",
             "code-2", 
-            () => this.insertTextAtCursor("```mermaid\n\n```")
+            () => this.insertTextAtCursor(
+                this._plugin._mermaidElementService.getSampleDiagram(
+                    this._plugin.settings.selectedCategory))
         ),
         new MermaidToolbarButton(
             "open Mermaid.js documentation web page",
