@@ -1,4 +1,5 @@
 # Mermaid Tools for Obsidian.md
+## About Mermaid
 [Mermaid.js](https://mermaid-js.github.io) lets you create diagrams and visualizations using text:
 
 ```
@@ -13,7 +14,8 @@ Obsidian supports Mermaid.js natively, via `mermaid` codeblocks.
 
 ⚠️ Please note that **this plugin has no control over how Mermaid is rendered** - this is up to Obsidian itself. All bugs concerning rendering of diagrams should be posted to official forums.
 
-## Toolbar
+
+## Mermaid Tools
 This plugin adds a toolbar with common Mermaid.js elements, so you won't have to remember them.
 
 Use ribbon icon or `Mermaid: Open Toolbar View` command to open the toolbar.
