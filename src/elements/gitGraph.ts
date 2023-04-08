@@ -1,12 +1,12 @@
 import { ElementCategory } from "src/core/ElementCategory";
 import { IMermaidElement } from "src/core/IMermaidElement";
 
-
 export let gitGraphElements: IMermaidElement[] = [
-    {
-        category: ElementCategory.GitGraph,
-        description: "simple git graph",
-        content: `gitGraph
+	{
+		id: crypto.randomUUID(),
+		category: ElementCategory.GitGraph,
+		description: "simple git graph",
+		content: `gitGraph
         commit
         commit
         branch develop
@@ -17,41 +17,46 @@ export let gitGraphElements: IMermaidElement[] = [
         merge develop
         commit
         commit`,
-        sortingOrder: 0,
-        isPinned: false
-    },
-    {
-        category: ElementCategory.GitGraph,
-        description: "tagged commit",
-        content: `commit id: "Normal" tag: "v1.0.0"`,
-        sortingOrder: 0,
-        isPinned: false
-    },
-    {
-        category: ElementCategory.GitGraph,
-        description: "reverse commit",
-        content: `commit id: "Reverse" type: REVERSE`,
-        sortingOrder: 0,
-        isPinned: false
-    },
-    {
-        category: ElementCategory.GitGraph,
-        description: "highlighted commit",
-        content: `commit id: "Highlight" type: HIGHLIGHT`,
-        sortingOrder: 0,
-        isPinned: false
-    },
-    {
-        category: ElementCategory.GitGraph,
-        description: "reverse commit",
-        content: `commit id: "Reverse" type: REVERSE`,
-        sortingOrder: 0,
-        isPinned: false
-    },
-    {
-        category: ElementCategory.GitGraph,
-        description: "git graph with cherry-pick",
-        content: `gitGraph
+		sortingOrder: 0,
+		isPinned: false,
+	},
+	{
+		id: crypto.randomUUID(),
+		category: ElementCategory.GitGraph,
+		description: "tagged commit",
+		content: `commit id: "Normal" tag: "v1.0.0"`,
+		sortingOrder: 0,
+		isPinned: false,
+	},
+	{
+		id: crypto.randomUUID(),
+		category: ElementCategory.GitGraph,
+		description: "reverse commit",
+		content: `commit id: "Reverse" type: REVERSE`,
+		sortingOrder: 0,
+		isPinned: false,
+	},
+	{
+		id: crypto.randomUUID(),
+		category: ElementCategory.GitGraph,
+		description: "highlighted commit",
+		content: `commit id: "Highlight" type: HIGHLIGHT`,
+		sortingOrder: 0,
+		isPinned: false,
+	},
+	{
+		id: crypto.randomUUID(),
+		category: ElementCategory.GitGraph,
+		description: "reverse commit",
+		content: `commit id: "Reverse" type: REVERSE`,
+		sortingOrder: 0,
+		isPinned: false,
+	},
+	{
+		id: crypto.randomUUID(),
+		category: ElementCategory.GitGraph,
+		description: "git graph with cherry-pick",
+		content: `gitGraph
         commit id: "ZERO"
         branch develop
         commit id:"A"
@@ -65,8 +70,7 @@ export let gitGraphElements: IMermaidElement[] = [
         commit id:"THREE"
         checkout develop
         commit id:"C"`,
-        sortingOrder: 0,
-        isPinned: false
-    },
-    
-]
+		sortingOrder: 0,
+		isPinned: false,
+	},
+];

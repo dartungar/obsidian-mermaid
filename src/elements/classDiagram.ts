@@ -3,6 +3,7 @@ import { IMermaidElement } from "src/core/IMermaidElement";
 
 export let classDiagramElements: IMermaidElement[] = [
 	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "sample class",
 		content: `class Duck{
@@ -14,6 +15,7 @@ export let classDiagramElements: IMermaidElement[] = [
 		isPinned: false,
 	},
 	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "sample class",
 		content: `class BankAccount
@@ -25,6 +27,7 @@ export let classDiagramElements: IMermaidElement[] = [
 		isPinned: false,
 	},
 	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "generic class",
 		content: `class Square~Shape~{
@@ -41,6 +44,7 @@ export let classDiagramElements: IMermaidElement[] = [
 		isPinned: false,
 	},
 	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "inheritance",
 		content: "classA <|-- classB",
@@ -48,6 +52,7 @@ export let classDiagramElements: IMermaidElement[] = [
 		isPinned: false,
 	},
 	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "composition",
 		content: "classC *-- classD",
@@ -55,6 +60,7 @@ export let classDiagramElements: IMermaidElement[] = [
 		isPinned: false,
 	},
 	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "aggregation",
 		content: "classE o-- classF",
@@ -62,6 +68,7 @@ export let classDiagramElements: IMermaidElement[] = [
 		isPinned: false,
 	},
 	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "association",
 		content: "classG <-- classH",
@@ -69,6 +76,7 @@ export let classDiagramElements: IMermaidElement[] = [
 		isPinned: false,
 	},
 	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "solid link",
 		content: "classI -- classJ",
@@ -76,6 +84,7 @@ export let classDiagramElements: IMermaidElement[] = [
 		isPinned: false,
 	},
 	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "dependency",
 		content: "classK <.. classL",
@@ -83,6 +92,7 @@ export let classDiagramElements: IMermaidElement[] = [
 		isPinned: false,
 	},
 	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "realization",
 		content: "classM <|.. classN",
@@ -90,13 +100,15 @@ export let classDiagramElements: IMermaidElement[] = [
 		isPinned: false,
 	},
 	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "dashed link",
 		content: "classO .. classP",
 		sortingOrder: 0,
 		isPinned: false,
 	},
-    {
+	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "two-way relation",
 		content: "Animal <|--|> Zebra",
@@ -104,6 +116,7 @@ export let classDiagramElements: IMermaidElement[] = [
 		isPinned: false,
 	},
 	{
+		id: crypto.randomUUID(),
 		category: ElementCategory.ClassDiagram,
 		description: "sample class diagram",
 		content: `classDiagram

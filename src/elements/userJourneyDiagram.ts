@@ -1,9 +1,11 @@
 import { ElementCategory } from "src/core/ElementCategory";
 import { IMermaidElement } from "src/core/IMermaidElement";
+import { MermaidElementBase } from "src/core/mermaidElementBase";
 
 
-export let userJourneyDiagramElements: IMermaidElement[] = [
+export let userJourneyDiagramElements: MermaidElementBase[] = [
     {
+        id: crypto.randomUUID(),
         category: ElementCategory.UserJourneyDiagram,
         description: "a sample user journey diagram",
         content: `journey
@@ -19,6 +21,7 @@ export let userJourneyDiagramElements: IMermaidElement[] = [
         isPinned: false
     },
     {
+        id: crypto.randomUUID(),
         category: ElementCategory.UserJourneyDiagram,
         description: "a step in user journey",
         content: `      Step Title: 5: ActorName`,
