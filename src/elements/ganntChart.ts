@@ -1,12 +1,12 @@
 import { ElementCategory } from "src/core/ElementCategory";
 import { IMermaidElement } from "src/core/IMermaidElement";
 
-
 export let ganttChartElements: IMermaidElement[] = [
-    {
-        category: ElementCategory.GanttChart,
-        description: "simple gantt chart",
-        content: `gantt
+	{
+		id: crypto.randomUUID(),
+		category: ElementCategory.GanttChart,
+		description: "simple gantt chart",
+		content: `gantt
         title A Gantt Diagram
         dateFormat  YYYY-MM-DD
         section Section
@@ -15,13 +15,14 @@ export let ganttChartElements: IMermaidElement[] = [
         section Another
         Task in sec      :2014-01-12  , 12d
         another task      : 24d`,
-        sortingOrder: 0,
-        isPinned: false
-    },
-    {
-        category: ElementCategory.GanttChart,
-        description: "rich gantt chart",
-        content: `gantt
+		sortingOrder: 0,
+		isPinned: false,
+	},
+	{
+		id: crypto.randomUUID(),
+		category: ElementCategory.GanttChart,
+		description: "rich gantt chart",
+		content: `gantt
         dateFormat  YYYY-MM-DD
         title       Adding GANTT diagram functionality to mermaid
         excludes    weekends
@@ -50,20 +51,21 @@ export let ganttChartElements: IMermaidElement[] = [
         Describe gantt syntax               :after doc1, 3d
         Add gantt diagram to demo page      :20h
         Add another diagram to demo page    :48h`,
-        sortingOrder: 0,
-        isPinned: false
-    },
-    {
-        category: ElementCategory.GanttChart,
-        description: "milestones example",
-        content: `gantt
+		sortingOrder: 1,
+		isPinned: false,
+	},
+	{
+		id: crypto.randomUUID(),
+		category: ElementCategory.GanttChart,
+		description: "milestones example",
+		content: `gantt
         dateFormat HH:mm
         axisFormat %H:%M
         Initial milestone : milestone, m1, 17:49,2min
         taska2 : 10min
         taska3 : 5min
         Final milestone : milestone, m2, 18:14, 2min`,
-        sortingOrder: 0,
-        isPinned: false
-    },
-]
+		sortingOrder: 2,
+		isPinned: false,
+	},
+];

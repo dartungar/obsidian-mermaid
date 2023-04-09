@@ -3,6 +3,7 @@ import { MermaidElementService } from 'src/core/elementService';
 import { TextEditorService } from 'src/core/textEditorService';
 import { MermaidPluginSettings } from 'src/settings/settings';
 import { addTridentIcon } from 'src/trident-icon';
+import { MermaidToolsSettingsTab } from 'src/ui/settingsTab';
 import { MermaidToolbarView } from 'src/ui/toolbarView/mermaidToolbarView';
 
 export const TRIDENT_ICON_NAME = "trident-custom";
@@ -42,6 +43,8 @@ export default class MermaidPlugin extends Plugin {
 				this.activateView();
 			},
 		});
+
+		this.addSettingTab(new MermaidToolsSettingsTab(this.app, this));
     }
 
     async onunload(): Promise<void> {
@@ -58,6 +61,7 @@ export default class MermaidPlugin extends Plugin {
 
 	async saveSettings() {
 		await this.saveData(this.settings);
+		await this.activateView();
 	}
 
 	async activateView() {
