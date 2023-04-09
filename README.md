@@ -31,6 +31,11 @@ A small demo:
 
 Note: in toolbar panel, all elements are wrapped as complete diagrams for rendering purposes.
 
+## Create & Manage elements
+You can create, delete, edit & reorder elements in settings tab:
+![mermaid-toolbar-settings](https://user-images.githubusercontent.com/36126057/230771305-0f329ec5-f397-499b-99db-394249ff2316.gif)
+
+
 ### Roadmap:
 - ✅ add / edit elements in settings
 - ✅ reorder elements in settings
