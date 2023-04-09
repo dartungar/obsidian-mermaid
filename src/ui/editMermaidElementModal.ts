@@ -4,11 +4,7 @@ import { ElementCategory } from "src/core/ElementCategory";
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export class EditMermaidElementModal extends Modal {
-
-    /**
-     *
-     */
-    constructor(app: App, private _plugin: MermaidPlugin, private _mermaid: any, private _element: IMermaidElement) {
+    constructor(app: App, private _plugin: MermaidPlugin, private _mermaid: any, public _element: IMermaidElement) {
         super(app);
     }
         
@@ -76,15 +72,7 @@ export class EditMermaidElementModal extends Modal {
     }
 
     save() {
-        this._plugin.settings.elements.forEach(element => {
-            if (element.id === this._element.id) {
-                element = this._element;
-                this._plugin.saveSettings();
-                this.close();
-            }
-        });
-        
-        this._plugin.settings.elements.push(this._element);
+        this._plugin._mermaidElementService.saveElement(this._element, this._plugin);
         this.close();
     }
     

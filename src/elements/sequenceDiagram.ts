@@ -8,7 +8,7 @@ export let sequenceDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.SequenceDiagram,
 		description: "a simple sequence diagram",
 		content: `sequenceDiagram\nAlice->>John: Hello John, how are you?\nJohn-->>Alice: Great!\nAlice-)John: See you later!`,
-		sortingOrder: 1,
+		sortingOrder: 0,
 		isPinned: false,
 	},
 	{

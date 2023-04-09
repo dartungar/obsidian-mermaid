@@ -2,6 +2,7 @@ import { sampleDiagrams } from "src/elements/sampleDiagrams";
 import { defaultElements } from "../elements/defaultElements"
 import { ElementCategory } from "./ElementCategory";
 import { IMermaidElement } from "./IMermaidElement";
+import MermaidPlugin from "main";
 
 interface IWrappingData {
     defaultWrapping: string,
@@ -24,6 +25,34 @@ let wrappingsForElementCategories: Record<ElementCategory, IWrappingData> = {
 export class MermaidElementService {
     static DefaultElements() {
         return defaultElements;
+    }
+        
+    
+
+    public saveElement(element: IMermaidElement, plugin: MermaidPlugin): void {
+
+        let elementExists = plugin.settings.elements.some(el => el.id === element.id);
+
+        if (elementExists) {
+            plugin.settings.elements.forEach(el => {
+                if (el.id === element.id) {
+                    el = element;
+                }
+            });
+
+        } else {
+            this.fixSortOrder(element, plugin);
+            plugin.settings.elements.push(element);
+        }
+
+        plugin.saveSettings();       
+    }
+
+    public fixSortOrder(element: IMermaidElement, plugin: MermaidPlugin) {
+        var elementsFromSameCategory = plugin.settings.elements.filter(element => element.category === element.category);
+        if (elementsFromSameCategory.some(element => element.sortingOrder === element.sortingOrder)) {
+            element.sortingOrder = elementsFromSameCategory.length;
+        }
     }
 
     public getSampleDiagram(category: ElementCategory): string {

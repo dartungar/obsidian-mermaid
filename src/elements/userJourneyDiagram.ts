@@ -25,7 +25,7 @@ export let userJourneyDiagramElements: MermaidElementBase[] = [
         category: ElementCategory.UserJourneyDiagram,
         description: "a step in user journey",
         content: `      Step Title: 5: ActorName`,
-        sortingOrder: 0,
+        sortingOrder: 1,
         isPinned: false
     },
 ]

@@ -3,6 +3,7 @@ import { IMermaidElement } from "src/core/IMermaidElement";
 import { ButtonComponent, DropdownComponent, loadMermaid } from "obsidian";
 import { MermaidElementService } from "src/core/elementService";
 import { MermaidToolbarButton } from "./mermaidToolbarButtons";
+import MermaidPlugin from "main";
 
 export const TOOLBAR_ELEMENT_CLASS_NAME = "mermaid-toolbar-element";
 export const TOOLBAR_ELEMENTS_CONTAINER_CLASS_NAME = "mermaid-toolbar-elements-container";

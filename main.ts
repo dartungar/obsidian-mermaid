@@ -60,8 +60,8 @@ export default class MermaidPlugin extends Plugin {
 	}
 
 	async saveSettings() {
-		console.log("saving settings", this.settings);
 		await this.saveData(this.settings);
+		await this.activateView();
 	}
 
 	async activateView() {

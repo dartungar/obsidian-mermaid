@@ -32,7 +32,7 @@ export let flowchartElements: IMermaidElement[] = [
 		category: ElementCategory.Flowchart,
 		description: "A stadium-shaped node",
 		content: "id1([Some text])",
-		sortingOrder: 3,
+		sortingOrder: 4,
 		isPinned: false,
 	},
 	{
@@ -40,7 +40,7 @@ export let flowchartElements: IMermaidElement[] = [
 		category: ElementCategory.Flowchart,
 		description: "A node in a cylindrical shape",
 		content: "id1[(Database)]",
-		sortingOrder: 3,
+		sortingOrder: 5,
 		isPinned: false,
 	},
 	{
@@ -48,7 +48,7 @@ export let flowchartElements: IMermaidElement[] = [
 		category: ElementCategory.Flowchart,
 		description: "A node in the form of a circle",
 		content: "id1((Some text))",
-		sortingOrder: 3,
+		sortingOrder: 6,
 		isPinned: false,
 	},
 	{
@@ -56,7 +56,7 @@ export let flowchartElements: IMermaidElement[] = [
 		category: ElementCategory.Flowchart,
 		description: "A node (rhombus)",
 		content: "id1{Some text}",
-		sortingOrder: 3,
+		sortingOrder: 7,
 		isPinned: false,
 	},
 	{
@@ -64,7 +64,7 @@ export let flowchartElements: IMermaidElement[] = [
 		category: ElementCategory.Flowchart,
 		description: "A link with arrow head",
 		content: "A-->B",
-		sortingOrder: 3,
+		sortingOrder: 8,
 		isPinned: false,
 	},
 	{
@@ -72,7 +72,7 @@ export let flowchartElements: IMermaidElement[] = [
 		category: ElementCategory.Flowchart,
 		description: "An open link",
 		content: "A --- B",
-		sortingOrder: 3,
+		sortingOrder: 9,
 		isPinned: false,
 	},
 	{
@@ -80,7 +80,7 @@ export let flowchartElements: IMermaidElement[] = [
 		category: ElementCategory.Flowchart,
 		description: "Text on links",
 		content: "A-- This is the text! ---B",
-		sortingOrder: 3,
+		sortingOrder: 10,
 		isPinned: false,
 	},
 	{
@@ -88,7 +88,7 @@ export let flowchartElements: IMermaidElement[] = [
 		category: ElementCategory.Flowchart,
 		description: "A link with arrow head and text",
 		content: "A-->|text|B",
-		sortingOrder: 3,
+		sortingOrder: 11,
 		isPinned: false,
 	},
 	{
@@ -96,7 +96,7 @@ export let flowchartElements: IMermaidElement[] = [
 		category: ElementCategory.Flowchart,
 		description: "Dotted link",
 		content: "A-.->B",
-		sortingOrder: 3,
+		sortingOrder: 12,
 		isPinned: false,
 	},
 	{
@@ -104,7 +104,7 @@ export let flowchartElements: IMermaidElement[] = [
 		category: ElementCategory.Flowchart,
 		description: "Thick link",
 		content: "A ==> B",
-		sortingOrder: 3,
+		sortingOrder: 13,
 		isPinned: false,
 	},
 	{
@@ -112,7 +112,7 @@ export let flowchartElements: IMermaidElement[] = [
 		category: ElementCategory.Flowchart,
 		description: "Subgraph",
 		content: "subgraph one\na1-->a2\nend",
-		sortingOrder: 3,
+		sortingOrder: 14,
 		isPinned: false,
 	},
 ];

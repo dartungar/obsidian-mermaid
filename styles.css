@@ -31,10 +31,19 @@
 
 .mermaid-tools-element-category-header::before {
     content: "▼  ";
+    font-size: 70%;
+    padding-bottom: 2px;
 }
 
 .mermaid-tools-element-category-header.collapsed::before {
     content: "▶  ";
+    font-size: 70%;
+    padding-bottom: 2px;
+}
+
+.mermaid-tools-element-container {
+    padding-top: 6px;
+    border-bottom: var(--border-width) solid var(--color-base-35);
 }
 
 .mermaid-tools-edit-element-modal > div {

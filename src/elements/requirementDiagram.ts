@@ -31,7 +31,7 @@ export let requirementDiagramElements: IMermaidElement[] = [
             type: customType
             docref: customDocRef
         }`,
-		sortingOrder: 0,
+		sortingOrder: 1,
 		isPinned: false,
 	},
 	{
@@ -44,7 +44,7 @@ export let requirementDiagramElements: IMermaidElement[] = [
             risk: High
             verifymethod: analysis
         }`,
-		sortingOrder: 0,
+		sortingOrder: 2,
 		isPinned: false,
 	},
 	{
@@ -57,7 +57,7 @@ export let requirementDiagramElements: IMermaidElement[] = [
             risk: Medium
             verifymethod: demonstration
         }`,
-		sortingOrder: 0,
+		sortingOrder: 3,
 		isPinned: false,
 	},
 	{
@@ -70,7 +70,7 @@ export let requirementDiagramElements: IMermaidElement[] = [
             risk: Low
             verifymethod: test
         }`,
-		sortingOrder: 0,
+		sortingOrder: 4,
 		isPinned: false,
 	},
 ];

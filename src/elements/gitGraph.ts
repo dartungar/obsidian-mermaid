@@ -25,7 +25,7 @@ export let gitGraphElements: IMermaidElement[] = [
 		category: ElementCategory.GitGraph,
 		description: "tagged commit",
 		content: `commit id: "Normal" tag: "v1.0.0"`,
-		sortingOrder: 0,
+		sortingOrder: 1,
 		isPinned: false,
 	},
 	{
@@ -33,7 +33,7 @@ export let gitGraphElements: IMermaidElement[] = [
 		category: ElementCategory.GitGraph,
 		description: "reverse commit",
 		content: `commit id: "Reverse" type: REVERSE`,
-		sortingOrder: 0,
+		sortingOrder: 2,
 		isPinned: false,
 	},
 	{
@@ -41,7 +41,7 @@ export let gitGraphElements: IMermaidElement[] = [
 		category: ElementCategory.GitGraph,
 		description: "highlighted commit",
 		content: `commit id: "Highlight" type: HIGHLIGHT`,
-		sortingOrder: 0,
+		sortingOrder: 3,
 		isPinned: false,
 	},
 	{
@@ -49,7 +49,7 @@ export let gitGraphElements: IMermaidElement[] = [
 		category: ElementCategory.GitGraph,
 		description: "reverse commit",
 		content: `commit id: "Reverse" type: REVERSE`,
-		sortingOrder: 0,
+		sortingOrder: 4,
 		isPinned: false,
 	},
 	{
@@ -70,7 +70,7 @@ export let gitGraphElements: IMermaidElement[] = [
         commit id:"THREE"
         checkout develop
         commit id:"C"`,
-		sortingOrder: 0,
+		sortingOrder:5,
 		isPinned: false,
 	},
 ];

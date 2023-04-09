@@ -22,7 +22,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
             string custNumber
             string sector
         }`,
-		sortingOrder: 0,
+		sortingOrder: 1,
 		isPinned: false,
 	},
 	{
@@ -30,7 +30,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.EntityRelationshipDiagram,
 		description: "one-to-many relationship",
 		content: `A ||--|{ B : label`,
-		sortingOrder: 0,
+		sortingOrder: 2,
 		isPinned: false,
 	},
 	{
@@ -38,7 +38,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.EntityRelationshipDiagram,
 		description: "many-to-many relationship",
 		content: `A }|--|{ B : label`,
-		sortingOrder: 0,
+		sortingOrder: 3,
 		isPinned: false,
 	},
 	{
@@ -46,7 +46,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.EntityRelationshipDiagram,
 		description: "one-to-one relationship",
 		content: `A ||--|| B : label`,
-		sortingOrder: 0,
+		sortingOrder: 4,
 		isPinned: false,
 	},
 	{
@@ -54,7 +54,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.EntityRelationshipDiagram,
 		description: "many-to-one relationship",
 		content: `A }|--|| B : label`,
-		sortingOrder: 0,
+		sortingOrder: 5,
 		isPinned: false,
 	},
 	{
@@ -62,7 +62,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.EntityRelationshipDiagram,
 		description: "zero/one-to-one relationship",
 		content: `A |o--|| B : label`,
-		sortingOrder: 0,
+		sortingOrder: 6,
 		isPinned: false,
 	},
 	{
@@ -70,7 +70,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.EntityRelationshipDiagram,
 		description: "one-to-one/zero relationship",
 		content: `A ||--o| B : label`,
-		sortingOrder: 0,
+		sortingOrder: 7,
 		isPinned: false,
 	},
 	{
@@ -78,7 +78,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.EntityRelationshipDiagram,
 		description: "zero-or-more-to-one relationship",
 		content: `A }o--|| B : label`,
-		sortingOrder: 0,
+		sortingOrder:8,
 		isPinned: false,
 	},
 	{
@@ -86,7 +86,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.EntityRelationshipDiagram,
 		description: "one-to-zero-or-more relationship",
 		content: `A ||--o{ B : label`,
-		sortingOrder: 0,
+		sortingOrder: 9,
 		isPinned: false,
 	},
 	{
@@ -94,7 +94,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.EntityRelationshipDiagram,
 		description: "zero-or-more-to-many relationship",
 		content: `A }o--|{ B : label`,
-		sortingOrder: 0,
+		sortingOrder: 10,
 		isPinned: false,
 	},
 	{
@@ -102,7 +102,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.EntityRelationshipDiagram,
 		description: "many-to-zero-or-more relationship",
 		content: `A }|--o{ B : label`,
-		sortingOrder: 0,
+		sortingOrder: 11,
 		isPinned: false,
 	},
 ];

@@ -51,7 +51,7 @@ export let ganttChartElements: IMermaidElement[] = [
         Describe gantt syntax               :after doc1, 3d
         Add gantt diagram to demo page      :20h
         Add another diagram to demo page    :48h`,
-		sortingOrder: 0,
+		sortingOrder: 1,
 		isPinned: false,
 	},
 	{
@@ -65,7 +65,7 @@ export let ganttChartElements: IMermaidElement[] = [
         taska2 : 10min
         taska3 : 5min
         Final milestone : milestone, m2, 18:14, 2min`,
-		sortingOrder: 0,
+		sortingOrder: 2,
 		isPinned: false,
 	},
 ];

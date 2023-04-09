@@ -30,7 +30,7 @@ export let stateDiagramElements: IMermaidElement[] = [
         Moving --> Still
         Moving --> Crash
         Crash --> [*]`,
-		sortingOrder: 0,
+		sortingOrder: 1,
 		isPinned: false,
 	},
 	{
@@ -38,7 +38,7 @@ export let stateDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.StateDiagram,
 		description: "node with description",
 		content: `s2 : This is a state description`,
-		sortingOrder: 0,
+		sortingOrder: 2,
 		isPinned: false,
 	},
 	{
@@ -46,7 +46,7 @@ export let stateDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.StateDiagram,
 		description: "a transition",
 		content: `s1 --> s2`,
-		sortingOrder: 0,
+		sortingOrder: 3,
 		isPinned: false,
 	},
 	{
@@ -54,7 +54,7 @@ export let stateDiagramElements: IMermaidElement[] = [
 		category: ElementCategory.StateDiagram,
 		description: "a transition with label",
 		content: `s1 --> s2: A transition`,
-		sortingOrder: 0,
+		sortingOrder: 4,
 		isPinned: false,
 	},
 	{
@@ -67,7 +67,7 @@ export let stateDiagramElements: IMermaidElement[] = [
             [*] --> second
             second --> [*]
         }`,
-		sortingOrder: 0,
+		sortingOrder: 5,
 		isPinned: false,
 	},
 	{
@@ -80,7 +80,7 @@ export let stateDiagramElements: IMermaidElement[] = [
         IsPositive --> if_state
         if_state --> False: if n < 0
         if_state --> True : if n >= 0`,
-		sortingOrder: 0,
+		sortingOrder: 6,
 		isPinned: false,
 	},
 	{
@@ -98,7 +98,7 @@ export let stateDiagramElements: IMermaidElement[] = [
           State3 --> join_state
           join_state --> State4
           State4 --> [*]`,
-		sortingOrder: 0,
+		sortingOrder: 7,
 		isPinned: false,
 	},
 	{
@@ -121,7 +121,7 @@ export let stateDiagramElements: IMermaidElement[] = [
             ScrollLockOff --> ScrollLockOn : EvScrollLockPressed
             ScrollLockOn --> ScrollLockOff : EvScrollLockPressed
         }`,
-		sortingOrder: 0,
+		sortingOrder: 8,
 		isPinned: false,
 	},
 ];

@@ -22,7 +22,7 @@ export let pieChartElements: IMermaidElement[] = [
         "Graphs" : 85
         "Dashboards" : 14
         "Tips" : 1`,
-		sortingOrder: 0,
+		sortingOrder: 1,
 		isPinned: false,
 	},
 ];
