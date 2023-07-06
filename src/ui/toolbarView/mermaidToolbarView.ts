@@ -25,7 +25,15 @@ export class MermaidToolbarView extends ItemView {
         new MermaidToolbarButton(
             "open Mermaid.js documentation web page",
             "external-link",
-            () => window.open("https://mermaid-js.github.io/mermaid/#/")
+            () => window.open("https://mermaid.js.org/intro/")
+        ),
+        new MermaidToolbarButton(
+            "open settings",
+            "settings",
+            () => {
+                (this.app as any).setting.open();
+                (this.app as any).setting.openTabById("mermaid-tools");
+            }
         )
     ]
 
