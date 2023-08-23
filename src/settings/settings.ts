@@ -8,7 +8,7 @@ export class MermaidPluginSettings {
     selectedCategory: ElementCategory;
 
     public static DefaultSettings() {
-        var settings = new MermaidPluginSettings();
+        let settings = new MermaidPluginSettings();
         settings.elements = defaultElements;
         settings.selectedCategory = ElementCategory.Flowchart;
         return settings;
