@@ -56,7 +56,7 @@ export class MermaidToolbarView extends ItemView {
         const container = this.containerEl.children[1];
         container.empty();
 
-        let toolbarElement = await createMermaidToolbar(
+        var toolbarElement = await createMermaidToolbar(
             this.topRowButtons,
             this.items, 
             selectedCategory,

@@ -51,9 +51,11 @@ export class EditMermaidElementModal extends Modal {
         elementContentEl.style.height = "200px";
         elementContentEl.style.width = "100%";
         elementContentEl.onchange = async (e) => { 
-            let {svg} = await this._mermaid.render(renderEl.id, this._plugin._mermaidElementService.wrapAsCompleteDiagram(this._element));
-            renderEl.innerHTML = svg;
-            renderContainerEl.appendChild(renderEl);
+            this._element.content = elementContentEl.value; 
+            await this._mermaid.render(renderEl.id, this._plugin._mermaidElementService.wrapAsCompleteDiagram(this._element), (svg: any, bindFunctions: any) => {
+                renderEl.innerHTML = svg;
+                renderContainerEl.appendChild(renderEl);
+            });
         }
 
         // save button
@@ -62,9 +64,11 @@ export class EditMermaidElementModal extends Modal {
             this.save();
         }
 
-        let {svg} = await this._mermaid.render(renderEl.id, this._plugin._mermaidElementService.wrapAsCompleteDiagram(this._element));
-        renderEl.innerHTML = svg;
-        renderContainerEl.appendChild(renderEl);
+
+        await this._mermaid.render(renderEl.id, this._plugin._mermaidElementService.wrapAsCompleteDiagram(this._element), (svg: any, bindFunctions: any) => {
+            renderEl.innerHTML = svg;
+            renderContainerEl.appendChild(renderEl);
+        });
     }
 
     save() {
