@@ -78,10 +78,11 @@ async function recreateElementsSection(
         filteredSortedItems.forEach(async (elem, index) => {
             let el = createToolbarElement(sectionContainer);
             el.id = `mermaid-toolbar-element-${elem.category}-${index}`;
-            await mermaid.mermaidAPI.render(el.id, elemService.wrapAsCompleteDiagram(elem), (svg: any, bindFunctions: any) => {
-                el.innerHTML = svg;
-            });
+            console.log("toolbar element:", el, el.id);
+            let {svg} = await mermaid.render(el.id, elemService.wrapAsCompleteDiagram(elem));
+            el.innerHTML = svg;
             el.onclick = (e) => onElClick(elem.content);
+            sectionContainer.appendChild(el);
         }); 
 }
 
