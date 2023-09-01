@@ -49,7 +49,7 @@ export class MermaidElementService {
     }
 
     public fixSortOrder(element: IMermaidElement, plugin: MermaidPlugin) {
-        var elementsFromSameCategory = plugin.settings.elements.filter(element => element.category === element.category);
+        let elementsFromSameCategory = plugin.settings.elements.filter(element => element.category === element.category);
         if (elementsFromSameCategory.some(element => element.sortingOrder === element.sortingOrder)) {
             element.sortingOrder = elementsFromSameCategory.length;
         }
