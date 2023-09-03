@@ -1,6 +1,11 @@
 import {  Editor, Notice, Plugin } from 'obsidian';
+import { ElementCategory } from 'src/core/ElementCategory';
 import { MermaidElementService } from 'src/core/elementService';
 import { TextEditorService } from 'src/core/textEditorService';
+import { c4DiagramElements } from 'src/elements/c4Diagram';
+import { mindMapElements } from 'src/elements/mindMap';
+import { quadrantElements } from 'src/elements/quadrant';
+import { timelineElements } from 'src/elements/timeline';
 import { MermaidPluginSettings } from 'src/settings/settings';
 import { addTridentIcon } from 'src/trident-icon';
 import { MermaidToolsSettingsTab } from 'src/ui/settingsTab';
@@ -57,6 +62,27 @@ export default class MermaidPlugin extends Plugin {
 			MermaidPluginSettings.DefaultSettings(),
 			await this.loadData()
 		);
+
+		this.addNewCategories();
+	}
+
+	addNewCategories() {
+		if (!this.settings.elements.some(x => x.category === ElementCategory.Mindmap)) {
+			this.settings.elements.push(...mindMapElements);
+			console.log("[Mermaid Tools] added Mindmap elements");
+		};
+		if (!this.settings.elements.some(x => x.category === ElementCategory.Timeline)) {
+			this.settings.elements.push(...timelineElements);
+			console.log("[Mermaid Tools] added Timeline elements");
+		};
+		if (!this.settings.elements.some(x => x.category === ElementCategory.QuadrantChart)) {
+			this.settings.elements.push(...quadrantElements);
+			console.log("[Mermaid Tools] added QuadrantChart elements");
+		};
+		if (!this.settings.elements.some(x => x.category === ElementCategory.C4Diagram)) {
+			this.settings.elements.push(...c4DiagramElements);
+			console.log("[Mermaid Tools] added C4 diagram elements");
+		};
 	}
 
 	async saveSettings() {
