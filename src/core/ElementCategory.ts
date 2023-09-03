@@ -9,4 +9,8 @@ export enum ElementCategory {
     PieChart = "PieChart",
     RequirementDiagram = "RequirementDiagram",
     GitGraph = "GitGraph",    
+    Mindmap = "Mindmap",
+    Timeline = "Timeline",
+    C4Diagram = "C4Diagram",
+    QuadrantChart = "QuadrantChart"
 }

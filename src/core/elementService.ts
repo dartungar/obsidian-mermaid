@@ -19,15 +19,18 @@ let wrappingsForElementCategories: Record<ElementCategory, IWrappingData> = {
     GanttChart: { defaultWrapping: "gantt", wrappings: null },
     PieChart: { defaultWrapping: "pie", wrappings: null },
     RequirementDiagram: { defaultWrapping: "requirementDiagram", wrappings: null },
-    GitGraph: { defaultWrapping: "gitGraph", wrappings: null }
+    GitGraph: { defaultWrapping: "gitGraph", wrappings: null },
+    Mindmap: { defaultWrapping: "mindmap", wrappings: ["mindmap"] },
+    Timeline: { defaultWrapping: "timeline", wrappings: null },
+    QuadrantChart: { defaultWrapping: "quadrantChart", wrappings: null },
+    C4Diagram: { defaultWrapping: "C4Context", wrappings: null },
 }
 
 export class MermaidElementService {
-    static DefaultElements() {
+
+    static DefaultElements(): IMermaidElement[] {
         return defaultElements;
     }
-        
-    
 
     public saveElement(element: IMermaidElement, plugin: MermaidPlugin): void {
 
@@ -74,7 +77,8 @@ export class MermaidElementService {
 
     public wrapAsCompleteDiagram(element: IMermaidElement): string {
         let wrapping = wrappingsForElementCategories[element.category];
-        let content = this.withTitle(element.description, element.content);
+        // accTitle for Mindmap is bugged right now
+        let content = element.category === ElementCategory.Mindmap ? element.content : this.withTitle(element.description, element.content);
         return (wrapping.wrappings 
                 ? wrapping.wrappings.some(w => element.content.contains(w)) 
                 : element.content.contains(wrapping.defaultWrapping))
