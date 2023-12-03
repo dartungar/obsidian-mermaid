@@ -50,7 +50,8 @@ export class EditMermaidElementModal extends Modal {
         let elementContentEl = elementContentContainerEl.createEl("textarea", {text: this._element.content});
         elementContentEl.style.height = "200px";
         elementContentEl.style.width = "100%";
-        elementContentEl.onchange = async (e) => { 
+        elementContentEl.onchange = async (e: any) => { 
+            this._element.content = elementContentEl.value;
             let {svg} = await this._mermaid.render(renderEl.id, this._plugin._mermaidElementService.wrapAsCompleteDiagram(this._element));
             renderEl.innerHTML = svg;
             renderContainerEl.appendChild(renderEl);
