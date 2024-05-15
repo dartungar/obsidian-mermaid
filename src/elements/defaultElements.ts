@@ -9,12 +9,14 @@ import { mindMapElements } from "./mindMap";
 import { pieChartElements } from "./pieChart";
 import { quadrantElements } from "./quadrant";
 import { requirementDiagramElements } from "./requirementDiagram";
+import { sankeyDiagramElements } from "./sankeyDiagram";
 import { sequenceDiagramElements } from "./sequenceDiagram";
 import { stateDiagramElements } from "./stateDiagram";
 import { timelineElements } from "./timeline";
 import { userJourneyDiagramElements } from "./userJourneyDiagram";
+import { xyChartElements } from "./xyChart";
 
-export let defaultElements: IMermaidElement[] = [
+export const defaultElements: IMermaidElement[] = [
     ...flowchartElements,
     ...sequenceDiagramElements,
     ...classDiagramElements,
@@ -28,5 +30,7 @@ export let defaultElements: IMermaidElement[] = [
     ...mindMapElements,
     ...timelineElements,
     ...quadrantElements,
-    ...c4DiagramElements
+    ...c4DiagramElements,
+    ...sankeyDiagramElements,
+    ...xyChartElements
 ]

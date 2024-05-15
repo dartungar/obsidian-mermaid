@@ -12,5 +12,7 @@ export enum ElementCategory {
     Mindmap = "Mindmap",
     Timeline = "Timeline",
     C4Diagram = "C4Diagram",
-    QuadrantChart = "QuadrantChart"
+    QuadrantChart = "QuadrantChart",
+    SankeyDiagram = "SankeyDiagram",
+    XyChart = "XyChart",
 }
