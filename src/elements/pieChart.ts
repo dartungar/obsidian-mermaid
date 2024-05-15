@@ -1,7 +1,7 @@
 import { ElementCategory } from "src/core/ElementCategory";
 import { IMermaidElement } from "src/core/IMermaidElement";
 
-export let pieChartElements: IMermaidElement[] = [
+export const pieChartElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
 		category: ElementCategory.PieChart,

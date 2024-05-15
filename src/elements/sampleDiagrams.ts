@@ -1,8 +1,7 @@
 import { ElementCategory } from "src/core/ElementCategory";
-import { IMermaidElement } from "src/core/IMermaidElement";
 
 // diagrams to insert by default
-export let sampleDiagrams: Record<ElementCategory, string> = {
+export const sampleDiagrams: Record<ElementCategory, string> = {
     EntityRelationshipDiagram: `erDiagram
     CUSTOMER ||--o{ ORDER : places
     ORDER ||--|{ LINE-ITEM : contains
@@ -136,5 +135,17 @@ export let sampleDiagrams: Record<ElementCategory, string> = {
       UpdateRelStyle(SystemAA, SystemC, $textColor="blue", $lineColor="blue", $offsetY="-40", $offsetX="-50")
       UpdateRelStyle(SystemC, customerA, $textColor="red", $lineColor="red", $offsetX="-50", $offsetY="20")
     
-      UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")`
+      UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")`,
+      SankeyDiagram: `sankey-beta
+
+      %% source,target,value
+      Electricity grid,Over generation / exports,104.453
+      Electricity grid,Heating and cooling - homes,113.726
+      Electricity grid,H2 conversion,27.14`,
+      XyChart: `xychart-beta
+      title "Sales Revenue"
+      x-axis [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
+      y-axis "Revenue (in $)" 4000 --> 11000
+      bar [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+      line [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]`
 }

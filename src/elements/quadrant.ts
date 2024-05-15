@@ -1,7 +1,7 @@
 import { ElementCategory } from "src/core/ElementCategory";
 import { IMermaidElement } from "src/core/IMermaidElement";
 
-export let quadrantElements: IMermaidElement[] = [
+export const quadrantElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
 		category: ElementCategory.QuadrantChart,

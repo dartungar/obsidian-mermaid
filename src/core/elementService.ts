@@ -9,7 +9,7 @@ interface IWrappingData {
     wrappings: string[] | null
 }
 
-let wrappingsForElementCategories: Record<ElementCategory, IWrappingData> = {
+const wrappingsForElementCategories: Record<ElementCategory, IWrappingData> = {
     Flowchart: { defaultWrapping: "flowchart LR", wrappings: ["flowchart LR", "flowchart TD"] },
     SequenceDiagram: { defaultWrapping: "sequenceDiagram", wrappings: null },
     ClassDiagram: { defaultWrapping: "classDiagram", wrappings: null },
@@ -24,6 +24,8 @@ let wrappingsForElementCategories: Record<ElementCategory, IWrappingData> = {
     Timeline: { defaultWrapping: "timeline", wrappings: null },
     QuadrantChart: { defaultWrapping: "quadrantChart", wrappings: null },
     C4Diagram: { defaultWrapping: "C4Context", wrappings: null },
+    SankeyDiagram: { defaultWrapping: "sankey-beta", wrappings: null },
+    XyChart: { defaultWrapping: "xychart-beta", wrappings: null },
 }
 
 export class MermaidElementService {
@@ -34,7 +36,7 @@ export class MermaidElementService {
 
     public saveElement(element: IMermaidElement, plugin: MermaidPlugin): void {
 
-        let elementExists = plugin.settings.elements.some(el => el.id === element.id);
+        const elementExists = plugin.settings.elements.some(el => el.id === element.id);
 
         if (elementExists) {
             plugin.settings.elements.forEach(el => {
@@ -52,7 +54,7 @@ export class MermaidElementService {
     }
 
     public fixSortOrder(element: IMermaidElement, plugin: MermaidPlugin) {
-        let elementsFromSameCategory = plugin.settings.elements.filter(element => element.category === element.category);
+        const elementsFromSameCategory = plugin.settings.elements.filter(element => element.category === element.category);
         if (elementsFromSameCategory.some(element => element.sortingOrder === element.sortingOrder)) {
             element.sortingOrder = elementsFromSameCategory.length;
         }
@@ -76,9 +78,9 @@ export class MermaidElementService {
     }
 
     public wrapAsCompleteDiagram(element: IMermaidElement): string {
-        let wrapping = wrappingsForElementCategories[element.category];
+        const wrapping = wrappingsForElementCategories[element.category];
         // accTitle for Mindmap is bugged right now
-        let content = element.category === ElementCategory.Mindmap ? element.content : this.withTitle(element.description, element.content);
+        const content = element.category === ElementCategory.Mindmap ? element.content : this.withTitle(element.description, element.content);
         return (wrapping.wrappings 
                 ? wrapping.wrappings.some(w => element.content.contains(w)) 
                 : element.content.contains(wrapping.defaultWrapping))
