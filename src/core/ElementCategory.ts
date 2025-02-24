@@ -15,4 +15,8 @@ export enum ElementCategory {
     QuadrantChart = "QuadrantChart",
     SankeyDiagram = "SankeyDiagram",
     XyChart = "XyChart",
+    Kanban = "Kanban",
+    Architecture = "Architecture",
+    Block = "Block",
+    Packet = "Packet"
 }

@@ -1,9 +1,13 @@
-import {  Editor, Notice, Plugin } from 'obsidian';
+import {  Editor, Plugin } from 'obsidian';
 import { ElementCategory } from 'src/core/ElementCategory';
 import { MermaidElementService } from 'src/core/elementService';
 import { TextEditorService } from 'src/core/textEditorService';
+import { architectureElements } from 'src/elements/architecture';
+import { blockDiagramElements } from 'src/elements/blockDiagram';
 import { c4DiagramElements } from 'src/elements/c4Diagram';
+import { kanbanElements } from 'src/elements/kanban';
 import { mindMapElements } from 'src/elements/mindMap';
+import { packetElements } from 'src/elements/packet';
 import { quadrantElements } from 'src/elements/quadrant';
 import { timelineElements } from 'src/elements/timeline';
 import { MermaidPluginSettings } from 'src/settings/settings';
@@ -70,19 +74,37 @@ export default class MermaidPlugin extends Plugin {
 		if (!this.settings.elements.some(x => x.category === ElementCategory.Mindmap)) {
 			this.settings.elements.push(...mindMapElements);
 			console.log("[Mermaid Tools] added Mindmap elements");
-		};
+		}
 		if (!this.settings.elements.some(x => x.category === ElementCategory.Timeline)) {
 			this.settings.elements.push(...timelineElements);
 			console.log("[Mermaid Tools] added Timeline elements");
-		};
+		}
 		if (!this.settings.elements.some(x => x.category === ElementCategory.QuadrantChart)) {
 			this.settings.elements.push(...quadrantElements);
 			console.log("[Mermaid Tools] added QuadrantChart elements");
-		};
+		}
 		if (!this.settings.elements.some(x => x.category === ElementCategory.C4Diagram)) {
 			this.settings.elements.push(...c4DiagramElements);
 			console.log("[Mermaid Tools] added C4 diagram elements");
-		};
+		}
+
+		// TODO
+		if (!this.settings.elements.some(x => x.category === ElementCategory.Packet)) {
+			this.settings.elements.push(...packetElements);
+			console.log("[Mermaid Tools] added Packet elements");
+		}
+		if (!this.settings.elements.some(x => x.category === ElementCategory.Kanban)) {
+			this.settings.elements.push(...kanbanElements);
+			console.log("[Mermaid Tools] added Kanban elements");
+		}
+		if (!this.settings.elements.some(x => x.category === ElementCategory.Block)) {
+			this.settings.elements.push(...blockDiagramElements);
+			console.log("[Mermaid Tools] added Block elements");
+		}
+		if (!this.settings.elements.some(x => x.category === ElementCategory.Architecture)) {
+			this.settings.elements.push(...architectureElements);
+			console.log("[Mermaid Tools] added Architecture diagram elements");
+		}
 	}
 
 	async saveSettings() {
@@ -93,13 +115,16 @@ export default class MermaidPlugin extends Plugin {
 	async activateView() {
 		this.app.workspace.detachLeavesOfType(MermaidToolbarView.VIEW_TYPE);
 	
-		await this.app.workspace.getRightLeaf(false).setViewState({
-		  type: MermaidToolbarView.VIEW_TYPE,
-		  active: true,
+		if (this.app.workspace === null)
+			return;
+
+		await this.app.workspace.getRightLeaf(false)?.setViewState({
+			type: MermaidToolbarView.VIEW_TYPE,
+			active: true,
 		});
 	
 		this.app.workspace.revealLeaf(
-		  this.app.workspace.getLeavesOfType(MermaidToolbarView.VIEW_TYPE)[0]
+			this.app.workspace.getLeavesOfType(MermaidToolbarView.VIEW_TYPE)[0]
 		);
 	}
 

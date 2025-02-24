@@ -26,6 +26,11 @@ const wrappingsForElementCategories: Record<ElementCategory, IWrappingData> = {
     C4Diagram: { defaultWrapping: "C4Context", wrappings: null },
     SankeyDiagram: { defaultWrapping: "sankey-beta", wrappings: null },
     XyChart: { defaultWrapping: "xychart-beta", wrappings: null },
+
+    Packet: { defaultWrapping: "packet-beta", wrappings: null },
+    Kanban: { defaultWrapping: "kanban", wrappings: null },
+    Block: { defaultWrapping: "block-beta", wrappings: null },
+    Architecture: { defaultWrapping: "architecture-beta", wrappings: null },
 }
 
 export class MermaidElementService {
@@ -72,21 +77,15 @@ export class MermaidElementService {
         return `\`\`\`mermaid\n${text}\n\`\`\``;
     }
 
-    // title for mermaid.js
-    public withTitle(title: string, text: string): string {
-        return `${text}\naccTitle: ${title}\n`
-    }
-
     public wrapAsCompleteDiagram(element: IMermaidElement): string {
         const wrapping = wrappingsForElementCategories[element.category];
         // accTitle for Mindmap is bugged right now
-        const content = element.category === ElementCategory.Mindmap ? element.content : this.withTitle(element.description, element.content);
         return (wrapping.wrappings 
                 ? wrapping.wrappings.some(w => element.content.contains(w)) 
                 : element.content.contains(wrapping.defaultWrapping))
-            ? content
+            ? element.content
             : wrapping.defaultWrapping 
                 + "\n" 
-                + content;
+                + element.content;
     }
 }

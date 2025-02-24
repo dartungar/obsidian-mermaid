@@ -1,11 +1,15 @@
 import { IMermaidElement } from "../core/IMermaidElement";
+import { architectureElements } from "./architecture";
+import { blockDiagramElements } from "./blockDiagram";
 import { c4DiagramElements } from "./c4Diagram";
 import { classDiagramElements } from "./classDiagram";
 import { entityRelationshipDiagramElements } from "./entityRelationshipDiagram";
 import { flowchartElements } from "./flowchart";
 import { ganttChartElements } from "./ganntChart";
 import { gitGraphElements } from "./gitGraph";
+import { kanbanElements } from "./kanban";
 import { mindMapElements } from "./mindMap";
+import { packetElements } from "./packet";
 import { pieChartElements } from "./pieChart";
 import { quadrantElements } from "./quadrant";
 import { requirementDiagramElements } from "./requirementDiagram";
@@ -32,5 +36,9 @@ export const defaultElements: IMermaidElement[] = [
     ...quadrantElements,
     ...c4DiagramElements,
     ...sankeyDiagramElements,
-    ...xyChartElements
+    ...xyChartElements,
+    ...packetElements,
+    ...kanbanElements,
+    ...blockDiagramElements,
+    ...architectureElements
 ]
