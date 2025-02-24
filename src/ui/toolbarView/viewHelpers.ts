@@ -3,7 +3,6 @@ import { IMermaidElement } from "src/core/IMermaidElement";
 import { ButtonComponent, DropdownComponent, loadMermaid } from "obsidian";
 import { MermaidElementService } from "src/core/elementService";
 import { MermaidToolbarButton } from "./mermaidToolbarButtons";
-import MermaidPlugin from "main";
 
 export const TOOLBAR_ELEMENT_CLASS_NAME = "mermaid-toolbar-element";
 export const TOOLBAR_ELEMENTS_CONTAINER_CLASS_NAME = "mermaid-toolbar-elements-container";
@@ -15,12 +14,12 @@ export async function createMermaidToolbar(
     selectedCategory: ElementCategory,
     onCategoryChanged: (newCategory: ElementCategory) => void, 
     onElementClick: (elementContent: string) => void): Promise<HTMLElement> {
-        let container = document.createElement('div');
+        const container = document.createElement('div');
         // dropdown
-        let topRow = container.createDiv();
+        const topRow = container.createDiv();
         topRow.addClass("mermaid-toolbar-top-row");
         // elements
-        let elementsContainer = container.createDiv();
+        const elementsContainer = container.createDiv();
         elementsContainer.addClass(TOOLBAR_ELEMENTS_CONTAINER_CLASS_NAME);
         elementsContainer.setAttr("id", TOOLBAR_ELEMENTS_CONTAINER_ID);
 
@@ -34,7 +33,8 @@ export async function createMermaidToolbar(
 
 function createTopRowBtns(parentEl: HTMLDivElement, buttons: MermaidToolbarButton[]) {
     buttons.forEach(btn => {
-        let b = new ButtonComponent(parentEl)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const b = new ButtonComponent(parentEl)
                 .setClass("clickable-icon")
                 .setIcon(btn.iconName)
                 .setTooltip(btn.tooltip)
@@ -49,9 +49,9 @@ function createDropdown(
     selectedCategory: ElementCategory,
     onSelectionChanged: (newCategory: ElementCategory) => void,
     onElClick: (text: string) => void) {
-        let categories = Object.keys(ElementCategory);
+        const categories = Object.keys(ElementCategory);
 
-        let dropdown = new DropdownComponent(parentEl);
+        const dropdown = new DropdownComponent(parentEl);
         
         categories.forEach(c => {
             dropdown.addOption(c, c);
@@ -71,15 +71,18 @@ async function recreateElementsSection(
     onElClick: (elementContent: string) => void) 
 {
         sectionContainer.innerHTML = '';
-        let elemService = new MermaidElementService();
-        let mermaid = await loadMermaid();
+        const elemService = new MermaidElementService();
+        const mermaid = await loadMermaid();
 
-        let filteredSortedItems = items.filter(i => i.category == category).sort((a, b) => a.sortingOrder - b.sortingOrder);
+        const filteredSortedItems = items.filter(i => i.category == category).sort((a, b) => a.sortingOrder - b.sortingOrder);
         
         filteredSortedItems.forEach(async (elem, index) => {
-            let el = createToolbarElement(sectionContainer);
+            const el = createToolbarElement(sectionContainer);
             el.id = `mermaid-toolbar-element-${elem.category}-${index}`;
-            let {svg} = await mermaid.render(el.id, elemService.wrapAsCompleteDiagram(elem));
+            const diagram = elemService.wrapAsCompleteDiagram(elem);
+            console.log(mermaid.detectType(diagram));
+            const {svg} = await mermaid.render(el.id, diagram);
+            el.title = elem.description;
             el.innerHTML = svg;
             el.onclick = (e) => onElClick(elem.content);
             sectionContainer.appendChild(el);
@@ -87,7 +90,7 @@ async function recreateElementsSection(
 }
 
 function createToolbarElement(parentEl: HTMLElement): HTMLElement {
-    let itemEl = parentEl.createEl("pre");
+    const itemEl = parentEl.createEl("pre");
     itemEl.addClass(TOOLBAR_ELEMENT_CLASS_NAME);
     return itemEl;
 }
