@@ -1,4 +1,4 @@
-import { App, Editor, MarkdownView } from "obsidian";
+import { Editor } from "obsidian";
 import { MermaidElementService } from "./elementService";
 
 export class NoActiveCursorError extends Error { 
@@ -15,8 +15,9 @@ export class TextEditorService {
         if (!editor) 
             throw new NoActiveCursorError();
         content = this._elementService.wrapForPastingIntoEditor(content);
-        let cursor = editor.getCursor();
+        const cursor = editor.getCursor();
         editor.replaceRange(content, cursor);
         editor.setCursor(content.length);
+        editor.focus();
     }
 }
