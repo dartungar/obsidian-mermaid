@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export let entityRelationshipDiagramElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.EntityRelationshipDiagram,
+		categoryId: "entityRelationshipDiagram",
 		description: "a sample entity relationship diagram",
 		content: `erDiagram
         CUSTOMER ||--o{ ORDER : places
@@ -15,7 +15,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.EntityRelationshipDiagram,
+		categoryId: "entityRelationshipDiagram",
 		description: "an entity",
 		content: `    CUSTOMER {
             string name
@@ -27,7 +27,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.EntityRelationshipDiagram,
+		categoryId: "entityRelationshipDiagram",
 		description: "one-to-many relationship",
 		content: `A ||--|{ B : label`,
 		sortingOrder: 2,
@@ -35,7 +35,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.EntityRelationshipDiagram,
+		categoryId: "entityRelationshipDiagram",
 		description: "many-to-many relationship",
 		content: `A }|--|{ B : label`,
 		sortingOrder: 3,
@@ -43,7 +43,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.EntityRelationshipDiagram,
+		categoryId: "entityRelationshipDiagram",
 		description: "one-to-one relationship",
 		content: `A ||--|| B : label`,
 		sortingOrder: 4,
@@ -51,7 +51,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.EntityRelationshipDiagram,
+		categoryId: "entityRelationshipDiagram",
 		description: "many-to-one relationship",
 		content: `A }|--|| B : label`,
 		sortingOrder: 5,
@@ -59,7 +59,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.EntityRelationshipDiagram,
+		categoryId: "entityRelationshipDiagram",
 		description: "zero/one-to-one relationship",
 		content: `A |o--|| B : label`,
 		sortingOrder: 6,
@@ -67,7 +67,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.EntityRelationshipDiagram,
+		categoryId: "entityRelationshipDiagram",
 		description: "one-to-one/zero relationship",
 		content: `A ||--o| B : label`,
 		sortingOrder: 7,
@@ -75,7 +75,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.EntityRelationshipDiagram,
+		categoryId: "entityRelationshipDiagram",
 		description: "zero-or-more-to-one relationship",
 		content: `A }o--|| B : label`,
 		sortingOrder:8,
@@ -83,7 +83,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.EntityRelationshipDiagram,
+		categoryId: "entityRelationshipDiagram",
 		description: "one-to-zero-or-more relationship",
 		content: `A ||--o{ B : label`,
 		sortingOrder: 9,
@@ -91,7 +91,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.EntityRelationshipDiagram,
+		categoryId: "entityRelationshipDiagram",
 		description: "zero-or-more-to-many relationship",
 		content: `A }o--|{ B : label`,
 		sortingOrder: 10,
@@ -99,7 +99,7 @@ export let entityRelationshipDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.EntityRelationshipDiagram,
+		categoryId: "entityRelationshipDiagram",
 		description: "many-to-zero-or-more relationship",
 		content: `A }|--o{ B : label`,
 		sortingOrder: 11,

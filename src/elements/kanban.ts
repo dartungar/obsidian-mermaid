@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export const kanbanElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.Kanban,
+		categoryId: "kanban",
 		description: "a sample kanban diagram",
 		content: `kanban
   Todo

@@ -1,6 +1,5 @@
 import { ItemView, WorkspaceLeaf } from "obsidian";
-import { TextEditorService } from "src/core/textEditorService";
-import { ElementCategory } from "../../core/ElementCategory";
+import { CategoryService } from "src/core/categoryService";
 import {TRIDENT_ICON_NAME} from "main";
 import MermaidPlugin from "main";
 import { createMermaidToolbar } from "./viewHelpers";
@@ -13,6 +12,7 @@ export class MermaidToolbarView extends ItemView {
 
     private _plugin: MermaidPlugin;
     private items: IMermaidElement[];
+    private categoryService: CategoryService;
 
     topRowButtons: MermaidToolbarButton[] = [
         new MermaidToolbarButton(
@@ -20,7 +20,7 @@ export class MermaidToolbarView extends ItemView {
             "code-2", 
             () => this.insertTextAtCursor(
                 this._plugin._mermaidElementService.getSampleDiagram(
-                    this._plugin.settings.selectedCategory))
+                    this._plugin.settings.selectedCategoryId))
         ),
         new MermaidToolbarButton(
             "open Mermaid.js documentation web page",
@@ -41,31 +41,35 @@ export class MermaidToolbarView extends ItemView {
         super(leaf);
         this._plugin = plugin;
         this.items = plugin.settings.elements;
+        this.categoryService = CategoryService.getInstance();
+        // Load custom categories
+        this.categoryService.loadCategories(plugin.settings.customCategories);
         this.containerEl.children[1].addClass("mermaid-toolbar-container");
     }
 
     async onOpen() {
-        await this.recreateToolbar(this._plugin.settings.selectedCategory);
+        await this.recreateToolbar(this._plugin.settings.selectedCategoryId);
     }
     
     async onClose() {
     // Nothing to clean up.
     }
 
-    async recreateToolbar(selectedCategory: ElementCategory): Promise<any> {
+    async recreateToolbar(selectedCategoryId: string): Promise<void> {
         const container = this.containerEl.children[1];
         container.empty();
 
-        let toolbarElement = await createMermaidToolbar(
+        const toolbarElement = await createMermaidToolbar(
             this.topRowButtons,
             this.items, 
-            selectedCategory,
-            async (newCat) => {
-                this._plugin.settings.selectedCategory = newCat;
+            selectedCategoryId,
+            async (newCategoryId) => {
+                this._plugin.settings.selectedCategoryId = newCategoryId;
                 this._plugin.saveSettings();
-                await this.recreateToolbar(this._plugin.settings.selectedCategory);
+                await this.recreateToolbar(this._plugin.settings.selectedCategoryId);
             },
-            text => this.insertTextAtCursor(text));
+            text => this.insertTextAtCursor(text),
+            this.categoryService);
         container.appendChild(toolbarElement);
     }
 

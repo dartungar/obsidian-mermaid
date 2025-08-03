@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export const xyChartElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.XyChart,
+		categoryId: "xyChart",
 		description: "a sample XYChart diagram",
 		content: `xychart-beta
         title "Sales Revenue"

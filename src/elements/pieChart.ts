@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export const pieChartElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.PieChart,
+		categoryId: "pieChart",
 		description: "sample pie chart",
 		content: `pie title /r/obsidianmd posts by type
         "Graphs" : 85
@@ -15,7 +15,7 @@ export const pieChartElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.PieChart,
+		categoryId: "pieChart",
 		description: "sample pie chart with values shown in legend",
 		content: `pie showData title /r/obsidianmd posts by type
         "Graphs" : 85

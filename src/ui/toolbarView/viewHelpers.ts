@@ -1,5 +1,5 @@
-import { ElementCategory } from "src/core/ElementCategory";
 import { IMermaidElement } from "src/core/IMermaidElement";
+import { CategoryService } from "src/core/categoryService";
 import { ButtonComponent, DropdownComponent, loadMermaid } from "obsidian";
 import { MermaidElementService } from "src/core/elementService";
 import { MermaidToolbarButton } from "./mermaidToolbarButtons";
@@ -11,9 +11,10 @@ export const TOOLBAR_ELEMENTS_CONTAINER_ID = "mermaid-toolbar-elements-container
 export async function createMermaidToolbar(
     topRowButtons: MermaidToolbarButton[],
     items: IMermaidElement[], 
-    selectedCategory: ElementCategory,
-    onCategoryChanged: (newCategory: ElementCategory) => void, 
-    onElementClick: (elementContent: string) => void): Promise<HTMLElement> {
+    selectedCategoryId: string,
+    onCategoryChanged: (newCategoryId: string) => void, 
+    onElementClick: (elementContent: string) => void,
+    categoryService: CategoryService): Promise<HTMLElement> {
         const container = document.createElement('div');
         // dropdown
         const topRow = container.createDiv();
@@ -23,10 +24,10 @@ export async function createMermaidToolbar(
         elementsContainer.addClass(TOOLBAR_ELEMENTS_CONTAINER_CLASS_NAME);
         elementsContainer.setAttr("id", TOOLBAR_ELEMENTS_CONTAINER_ID);
 
-        createDropdown(topRow, elementsContainer, items, selectedCategory, onCategoryChanged, onElementClick);
+        createDropdown(topRow, elementsContainer, items, selectedCategoryId, onCategoryChanged, onElementClick, categoryService);
         createTopRowBtns(topRow, topRowButtons);
 
-        await recreateElementsSection(elementsContainer, selectedCategory, items, onElementClick);
+        await recreateElementsSection(elementsContainer, selectedCategoryId, items, onElementClick, categoryService);
         
         return container;
 }
@@ -46,39 +47,41 @@ function createDropdown(
     parentEl: HTMLDivElement, 
     elementsContainer: HTMLDivElement,
     items: IMermaidElement[], 
-    selectedCategory: ElementCategory,
-    onSelectionChanged: (newCategory: ElementCategory) => void,
-    onElClick: (text: string) => void) {
-        const categories = Object.keys(ElementCategory);
+    selectedCategoryId: string,
+    onSelectionChanged: (newCategoryId: string) => void,
+    onElClick: (text: string) => void,
+    categoryService: CategoryService) {
+        const categories = categoryService.getCategories();
 
         const dropdown = new DropdownComponent(parentEl);
         
-        categories.forEach(c => {
-            dropdown.addOption(c, c);
+        categories.forEach(category => {
+            dropdown.addOption(category.id, category.name);
         })
-        dropdown.setValue(selectedCategory);
+        dropdown.setValue(selectedCategoryId);
         
         dropdown.onChange(val => {
-            onSelectionChanged(val as ElementCategory);
-            recreateElementsSection(elementsContainer, val as ElementCategory, items, onElClick);
+            onSelectionChanged(val);
+            recreateElementsSection(elementsContainer, val, items, onElClick, categoryService);
         })
 }
 
 async function recreateElementsSection(
     sectionContainer: HTMLElement,
-    category: ElementCategory, 
+    categoryId: string, 
     items: IMermaidElement[], 
-    onElClick: (elementContent: string) => void) 
+    onElClick: (elementContent: string) => void,
+    categoryService: CategoryService) 
 {
         sectionContainer.innerHTML = '';
         const elemService = new MermaidElementService();
         const mermaid = await loadMermaid();
 
-        const filteredSortedItems = items.filter(i => i.category == category).sort((a, b) => a.sortingOrder - b.sortingOrder);
+        const filteredSortedItems = items.filter(i => i.categoryId === categoryId).sort((a, b) => a.sortingOrder - b.sortingOrder);
         
         filteredSortedItems.forEach(async (elem, index) => {
             const el = createToolbarElement(sectionContainer);
-            el.id = `mermaid-toolbar-element-${elem.category}-${index}`;
+            el.id = `mermaid-toolbar-element-${elem.categoryId}-${index}`;
             const diagram = elemService.wrapAsCompleteDiagram(elem);
             console.log(mermaid.detectType(diagram));
             const {svg} = await mermaid.render(el.id, diagram);

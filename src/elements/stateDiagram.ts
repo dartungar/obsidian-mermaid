@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export let stateDiagramElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.StateDiagram,
+		categoryId: "stateDiagram",
 		description: "a sample state diagram",
 		content: `stateDiagram-v2
         [*] --> Still
@@ -19,7 +19,7 @@ export let stateDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.StateDiagram,
+		categoryId: "stateDiagram",
 		description: "a sample state diagram with left-to-right direction",
 		content: `stateDiagram-v2
         direction LR
@@ -35,7 +35,7 @@ export let stateDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.StateDiagram,
+		categoryId: "stateDiagram",
 		description: "node with description",
 		content: `s2 : This is a state description`,
 		sortingOrder: 2,
@@ -43,7 +43,7 @@ export let stateDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.StateDiagram,
+		categoryId: "stateDiagram",
 		description: "a transition",
 		content: `s1 --> s2`,
 		sortingOrder: 3,
@@ -51,7 +51,7 @@ export let stateDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.StateDiagram,
+		categoryId: "stateDiagram",
 		description: "a transition with label",
 		content: `s1 --> s2: A transition`,
 		sortingOrder: 4,
@@ -59,7 +59,7 @@ export let stateDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.StateDiagram,
+		categoryId: "stateDiagram",
 		description: "composite state",
 		content: `
         [*] --> First
@@ -72,7 +72,7 @@ export let stateDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.StateDiagram,
+		categoryId: "stateDiagram",
 		description: "diagram with choice",
 		content: `stateDiagram-v2
         state if_state <<choice>>
@@ -85,7 +85,7 @@ export let stateDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.StateDiagram,
+		categoryId: "stateDiagram",
 		description: "diagram with fork",
 		content: `stateDiagram-v2
         state fork_state <<fork>>
@@ -103,7 +103,7 @@ export let stateDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.StateDiagram,
+		categoryId: "stateDiagram",
 		description: "a diagram with concurrency",
 		content: `stateDiagram-v2
         [*] --> Active

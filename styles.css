@@ -53,3 +53,97 @@
 .mermaid-tools-edit-element-modal label {
     margin-right: 1rem;
 }
+
+/* Custom Category Management Styles */
+.mermaid-tools-category-management {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid var(--color-base-25);
+    border-radius: 8px;
+    background-color: var(--color-base-00);
+}
+
+.mermaid-tools-category-management h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-accent);
+}
+
+.mermaid-tools-category-management button.mod-cta {
+    margin-bottom: 1rem;
+}
+
+/* Edit Category Modal Styles */
+.mermaid-tools-edit-category-modal {
+    min-width: 500px;
+}
+
+.mermaid-tools-edit-category-modal .setting-item {
+    padding: 8px 0;
+    border: none;
+}
+
+.mermaid-tools-edit-category-modal .setting-item-info {
+    flex-grow: 1;
+    margin-right: 12px;
+}
+
+.mermaid-tools-edit-category-modal .setting-item-name {
+    font-weight: 600;
+    color: var(--text-normal);
+}
+
+.mermaid-tools-edit-category-modal .setting-item-description {
+    color: var(--text-muted);
+    font-size: var(--font-ui-smaller);
+}
+
+.mermaid-tools-edit-category-modal input,
+.mermaid-tools-edit-category-modal textarea {
+    width: 100%;
+    padding: 4px 8px;
+    border: 1px solid var(--color-base-30);
+    border-radius: 4px;
+    background-color: var(--color-base-00);
+    color: var(--text-normal);
+}
+
+.mermaid-tools-edit-category-modal input:focus,
+.mermaid-tools-edit-category-modal textarea:focus {
+    border-color: var(--color-accent);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-accent-2);
+}
+
+.modal-button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-base-25);
+}
+
+.modal-button-container button {
+    padding: 6px 16px;
+    border: 1px solid var(--color-base-30);
+    border-radius: 4px;
+    background-color: var(--color-base-10);
+    color: var(--text-normal);
+    cursor: pointer;
+    font-size: var(--font-ui-small);
+}
+
+.modal-button-container button:hover {
+    background-color: var(--color-base-20);
+}
+
+.modal-button-container button.mod-cta {
+    background-color: var(--color-accent);
+    color: var(--text-on-accent);
+    border-color: var(--color-accent);
+}
+
+.modal-button-container button.mod-cta:hover {
+    background-color: var(--color-accent-hover);
+}

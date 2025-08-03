@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export let mindMapElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.Mindmap,
+		categoryId: "mindmap",
 		description: "a simple mindmap",
 		content: `mindmap
         Root
@@ -16,7 +16,7 @@ export let mindMapElements: IMermaidElement[] = [
 	},
     {
 		id: crypto.randomUUID(),
-		category: ElementCategory.Mindmap,
+		categoryId: "mindmap",
 		description: "square",
 		content: `id[I am a square]`,
 		sortingOrder: 2,
@@ -24,7 +24,7 @@ export let mindMapElements: IMermaidElement[] = [
 	},
     {
 		id: crypto.randomUUID(),
-		category: ElementCategory.Mindmap,
+		categoryId: "mindmap",
 		description: "rounded square",
 		content: `id(I am a rounded square)`,
 		sortingOrder: 3,
@@ -32,7 +32,7 @@ export let mindMapElements: IMermaidElement[] = [
 	},
     {
 		id: crypto.randomUUID(),
-		category: ElementCategory.Mindmap,
+		categoryId: "mindmap",
 		description: "circle",
 		content: `id((I am a circle))`,
 		sortingOrder: 4,
@@ -40,7 +40,7 @@ export let mindMapElements: IMermaidElement[] = [
 	},
     {
 		id: crypto.randomUUID(),
-		category: ElementCategory.Mindmap,
+		categoryId: "mindmap",
 		description: "bang",
 		content: `id))I am a bang((`,
 		sortingOrder: 5,
@@ -48,7 +48,7 @@ export let mindMapElements: IMermaidElement[] = [
 	},
     {
 		id: crypto.randomUUID(),
-		category: ElementCategory.Mindmap,
+		categoryId: "mindmap",
 		description: "cloud",
 		content: `id)I am a cloud(`,
 		sortingOrder: 6,
@@ -56,7 +56,7 @@ export let mindMapElements: IMermaidElement[] = [
 	},
     {
 		id: crypto.randomUUID(),
-		category: ElementCategory.Mindmap,
+		categoryId: "mindmap",
 		description: "hexagon",
 		content: `id{{I am a hexagon}}`,
 		sortingOrder: 7,
@@ -64,7 +64,7 @@ export let mindMapElements: IMermaidElement[] = [
 	},
     {
 		id: crypto.randomUUID(),
-		category: ElementCategory.Mindmap,
+		categoryId: "mindmap",
 		description: "default",
 		content: `I am the default shape`,
 		sortingOrder: 8,
@@ -72,7 +72,7 @@ export let mindMapElements: IMermaidElement[] = [
 	},
     {
 		id: crypto.randomUUID(),
-		category: ElementCategory.Mindmap,
+		categoryId: "mindmap",
 		description: "sample mindmap",
 		content: `mindmap
         root((mindmap))

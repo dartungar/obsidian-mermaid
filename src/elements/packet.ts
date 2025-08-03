@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export const packetElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.Packet,
+		categoryId: "packet",
 		description: "a sample packet diagram",
 		content: `packet-beta
 title UDP Packet

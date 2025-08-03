@@ -1,10 +1,8 @@
-import { ElementCategory } from "./ElementCategory";
-
 export interface IMermaidElement {
     id: string,
     description: string,
     content: string,
-    category: ElementCategory,
+    categoryId: string, // Changed from ElementCategory enum to string ID
     sortingOrder: number,
     isPinned: boolean
 }

@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export let ganttChartElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.GanttChart,
+		categoryId: "ganttChart",
 		description: "simple gantt chart",
 		content: `gantt
         title A Gantt Diagram
@@ -20,7 +20,7 @@ export let ganttChartElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.GanttChart,
+		categoryId: "ganttChart",
 		description: "rich gantt chart",
 		content: `gantt
         dateFormat  YYYY-MM-DD
@@ -56,7 +56,7 @@ export let ganttChartElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.GanttChart,
+		categoryId: "ganttChart",
 		description: "milestones example",
 		content: `gantt
         dateFormat HH:mm

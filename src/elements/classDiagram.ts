@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export let classDiagramElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "sample class",
 		content: `class Duck{
             +String beakColor
@@ -16,7 +16,7 @@ export let classDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "sample class",
 		content: `class BankAccount
         BankAccount : +String owner
@@ -28,7 +28,7 @@ export let classDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "generic class",
 		content: `class Square~Shape~{
             int id
@@ -45,7 +45,7 @@ export let classDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "inheritance",
 		content: "classA <|-- classB",
 		sortingOrder: 3,
@@ -53,7 +53,7 @@ export let classDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "composition",
 		content: "classC *-- classD",
 		sortingOrder: 4,
@@ -61,7 +61,7 @@ export let classDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "aggregation",
 		content: "classE o-- classF",
 		sortingOrder: 5,
@@ -69,7 +69,7 @@ export let classDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "association",
 		content: "classG <-- classH",
 		sortingOrder: 6,
@@ -77,7 +77,7 @@ export let classDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "solid link",
 		content: "classI -- classJ",
 		sortingOrder: 7,
@@ -85,7 +85,7 @@ export let classDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "dependency",
 		content: "classK <.. classL",
 		sortingOrder: 8,
@@ -93,7 +93,7 @@ export let classDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "realization",
 		content: "classM <|.. classN",
 		sortingOrder: 9,
@@ -101,7 +101,7 @@ export let classDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "dashed link",
 		content: "classO .. classP",
 		sortingOrder: 10,
@@ -109,7 +109,7 @@ export let classDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "two-way relation",
 		content: "Animal <|--|> Zebra",
 		sortingOrder: 11,
@@ -117,7 +117,7 @@ export let classDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.ClassDiagram,
+		categoryId: "classDiagram",
 		description: "sample class diagram",
 		content: `classDiagram
         Animal <|-- Duck
