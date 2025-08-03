@@ -43,7 +43,7 @@ export class MermaidToolbarView extends ItemView {
         this.items = plugin.settings.elements;
         this.categoryService = CategoryService.getInstance();
         // Load custom categories
-        this.categoryService.loadCategories(plugin.settings.customCategories);
+        this.categoryService.loadCategories(plugin.settings.customCategories, plugin.settings.defaultCategorySortOrders);
         this.containerEl.children[1].addClass("mermaid-toolbar-container");
     }
 

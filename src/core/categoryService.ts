@@ -50,10 +50,16 @@ export class CategoryService {
         this.categories = this.categories.filter(cat => cat.id !== id);
     }
 
-    public loadCategories(categories: IElementCategory[]): void {
+    public loadCategories(customCategories: IElementCategory[], defaultCategorySortOrders: { [categoryId: string]: number } = {}): void {
+        // Create default categories with potentially modified sort orders
+        const defaultCategories = DEFAULT_CATEGORIES.map(cat => ({
+            ...cat,
+            sortOrder: defaultCategorySortOrders[cat.id] !== undefined ? defaultCategorySortOrders[cat.id] : cat.sortOrder
+        }));
+        
         // Merge default categories with custom categories from settings
-        const customCategories = categories.filter(cat => cat.isCustom);
-        this.categories = [...DEFAULT_CATEGORIES, ...customCategories];
+        const customCats = customCategories.filter(cat => cat.isCustom);
+        this.categories = [...defaultCategories, ...customCats];
     }
 
     public getCustomCategories(): IElementCategory[] {
