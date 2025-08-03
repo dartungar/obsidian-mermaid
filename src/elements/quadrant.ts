@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export const quadrantElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.QuadrantChart,
+		categoryId: "quadrantChart",
 		description: "sample quadrant chart",
 		content: `quadrantChart
 		title Reach and engagement of campaigns
@@ -25,7 +25,7 @@ export const quadrantElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.QuadrantChart,
+		categoryId: "quadrantChart",
 		description: "themed quadrant chart",
 		content: `%%{init: {"quadrantChart": {"chartWidth": 400, "chartHeight": 400}, "themeVariables": {"quadrant1TextFill": "#ff0000"} }}%%
 		quadrantChart

@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export let timelineElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.Timeline,
+		categoryId: "timeline",
 		description: "sample timeline",
 		content: `timeline
 		title History of Social Media Platform
@@ -18,7 +18,7 @@ export let timelineElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.Timeline,
+		categoryId: "timeline",
 		description: "timeline with grouping",
 		content: `timeline
 		title Timeline of Industrial Revolution
@@ -34,7 +34,7 @@ export let timelineElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.Timeline,
+		categoryId: "timeline",
 		description: "timeline with Forest theme. see the docs for additional themes",
 		content: `%%{init: { 'logLevel': 'debug', 'theme': 'forest' } }%%
 		timeline

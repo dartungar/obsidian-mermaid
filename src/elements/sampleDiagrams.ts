@@ -1,7 +1,5 @@
-import { ElementCategory } from "src/core/ElementCategory";
-
-// diagrams to insert by default
-export const sampleDiagrams: Record<ElementCategory, string> = {
+// diagrams to insert by default - using category names from defaultCategories
+export const sampleDiagrams: Record<string, string> = {
     EntityRelationshipDiagram: `erDiagram
     CUSTOMER ||--o{ ORDER : places
     ORDER ||--|{ LINE-ITEM : contains

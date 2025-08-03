@@ -1,5 +1,4 @@
 import {  Editor, Plugin } from 'obsidian';
-import { ElementCategory } from 'src/core/ElementCategory';
 import { MermaidElementService } from 'src/core/elementService';
 import { TextEditorService } from 'src/core/textEditorService';
 import { architectureElements } from 'src/elements/architecture';
@@ -71,37 +70,37 @@ export default class MermaidPlugin extends Plugin {
 	}
 
 	addNewCategories() {
-		if (!this.settings.elements.some(x => x.category === ElementCategory.Mindmap)) {
+		if (!this.settings.elements.some(x => x.categoryId === "mindmap")) {
 			this.settings.elements.push(...mindMapElements);
 			console.log("[Mermaid Tools] added Mindmap elements");
 		}
-		if (!this.settings.elements.some(x => x.category === ElementCategory.Timeline)) {
+		if (!this.settings.elements.some(x => x.categoryId === "timeline")) {
 			this.settings.elements.push(...timelineElements);
 			console.log("[Mermaid Tools] added Timeline elements");
 		}
-		if (!this.settings.elements.some(x => x.category === ElementCategory.QuadrantChart)) {
+		if (!this.settings.elements.some(x => x.categoryId === "quadrantChart")) {
 			this.settings.elements.push(...quadrantElements);
 			console.log("[Mermaid Tools] added QuadrantChart elements");
 		}
-		if (!this.settings.elements.some(x => x.category === ElementCategory.C4Diagram)) {
+		if (!this.settings.elements.some(x => x.categoryId === "c4Diagram")) {
 			this.settings.elements.push(...c4DiagramElements);
 			console.log("[Mermaid Tools] added C4 diagram elements");
 		}
 
 		// TODO
-		if (!this.settings.elements.some(x => x.category === ElementCategory.Packet)) {
+		if (!this.settings.elements.some(x => x.categoryId === "packet")) {
 			this.settings.elements.push(...packetElements);
 			console.log("[Mermaid Tools] added Packet elements");
 		}
-		if (!this.settings.elements.some(x => x.category === ElementCategory.Kanban)) {
+		if (!this.settings.elements.some(x => x.categoryId === "kanban")) {
 			this.settings.elements.push(...kanbanElements);
 			console.log("[Mermaid Tools] added Kanban elements");
 		}
-		if (!this.settings.elements.some(x => x.category === ElementCategory.Block)) {
+		if (!this.settings.elements.some(x => x.categoryId === "block")) {
 			this.settings.elements.push(...blockDiagramElements);
 			console.log("[Mermaid Tools] added Block elements");
 		}
-		if (!this.settings.elements.some(x => x.category === ElementCategory.Architecture)) {
+		if (!this.settings.elements.some(x => x.categoryId === "architecture")) {
 			this.settings.elements.push(...architectureElements);
 			console.log("[Mermaid Tools] added Architecture diagram elements");
 		}

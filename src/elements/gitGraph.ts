@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export let gitGraphElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.GitGraph,
+		categoryId: "gitGraph",
 		description: "simple git graph",
 		content: `gitGraph
         commit
@@ -22,7 +22,7 @@ export let gitGraphElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.GitGraph,
+		categoryId: "gitGraph",
 		description: "tagged commit",
 		content: `commit id: "Normal" tag: "v1.0.0"`,
 		sortingOrder: 1,
@@ -30,7 +30,7 @@ export let gitGraphElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.GitGraph,
+		categoryId: "gitGraph",
 		description: "reverse commit",
 		content: `commit id: "Reverse" type: REVERSE`,
 		sortingOrder: 2,
@@ -38,7 +38,7 @@ export let gitGraphElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.GitGraph,
+		categoryId: "gitGraph",
 		description: "highlighted commit",
 		content: `commit id: "Highlight" type: HIGHLIGHT`,
 		sortingOrder: 3,
@@ -46,7 +46,7 @@ export let gitGraphElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.GitGraph,
+		categoryId: "gitGraph",
 		description: "reverse commit",
 		content: `commit id: "Reverse" type: REVERSE`,
 		sortingOrder: 4,
@@ -54,7 +54,7 @@ export let gitGraphElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.GitGraph,
+		categoryId: "gitGraph",
 		description: "git graph with cherry-pick",
 		content: `gitGraph
         commit id: "ZERO"

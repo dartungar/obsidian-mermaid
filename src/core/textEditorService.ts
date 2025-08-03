@@ -17,7 +17,15 @@ export class TextEditorService {
         content = this._elementService.wrapForPastingIntoEditor(content);
         const cursor = editor.getCursor();
         editor.replaceRange(content, cursor);
-        editor.setCursor(content.length);
+
+        const lines = content.split("\n");
+        const newCursor = {
+        line: cursor.line + lines.length - 1,
+        ch: lines.length === 1
+            ? cursor.ch + lines[0].length
+            : lines[lines.length - 1].length
+        };
+        editor.setCursor(newCursor); 
         editor.focus();
     }
 }

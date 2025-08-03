@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export let c4DiagramElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.C4Diagram,
+		categoryId: "c4Diagram",
 		description: "sample C4 diagram (compatible with PlantUML)",
 		content: `C4Context
 		title System Context diagram for Internet Banking System

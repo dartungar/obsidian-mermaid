@@ -1,16 +1,21 @@
 import { defaultElements } from "src/elements/defaultElements";
-import { ElementCategory } from "src/core/ElementCategory";
 import { IMermaidElement } from "src/core/IMermaidElement";
+import { IElementCategory } from "src/core/IElementCategory";
 
 export class MermaidPluginSettings {
     elements: IMermaidElement[];
-    categories = ElementCategory;
-    selectedCategory: ElementCategory;
+    customCategories: IElementCategory[];
+    selectedCategoryId: string;
+    defaultCategorySortOrders: { [categoryId: string]: number };
+    categoryModifications: { [categoryId: string]: Partial<IElementCategory> };
 
     public static DefaultSettings() {
-        let settings = new MermaidPluginSettings();
+        const settings = new MermaidPluginSettings();
         settings.elements = defaultElements;
-        settings.selectedCategory = ElementCategory.Flowchart;
+        settings.customCategories = [];
+        settings.selectedCategoryId = "flowchart"; // Default to flowchart category ID
+        settings.defaultCategorySortOrders = {};
+        settings.categoryModifications = {};
         return settings;
     }
 

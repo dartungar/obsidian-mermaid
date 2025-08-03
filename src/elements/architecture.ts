@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export const architectureElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.Architecture,
+		categoryId: "architecture",
 		description: "a sample architecture diagram",
 		content: `architecture-beta
     group api(cloud)[API]

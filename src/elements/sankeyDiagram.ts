@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export const sankeyDiagramElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.SankeyDiagram,
+		categoryId: "sankeyDiagram",
 		description: "",
 		content: `sankey-beta
         %% source,target,value

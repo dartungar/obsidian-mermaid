@@ -1,10 +1,10 @@
-import { ElementCategory } from "src/core/ElementCategory";
+
 import { IMermaidElement } from "src/core/IMermaidElement";
 
 export let requirementDiagramElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.RequirementDiagram,
+		categoryId: "requirementDiagram",
 		description: "sample requirements diagram",
 		content: `    requirementDiagram
 
@@ -25,7 +25,7 @@ export let requirementDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.RequirementDiagram,
+		categoryId: "requirementDiagram",
 		description: "sample requirements diagram",
 		content: `element customElement {
             type: customType
@@ -36,7 +36,7 @@ export let requirementDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.RequirementDiagram,
+		categoryId: "requirementDiagram",
 		description: "a requirement with high risk",
 		content: `functionalRequirement myReq {
             id: reqId
@@ -49,7 +49,7 @@ export let requirementDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.RequirementDiagram,
+		categoryId: "requirementDiagram",
 		description: "sample requirements diagram",
 		content: `interfaceRequirement myReq2 {
             id: reqId
@@ -62,7 +62,7 @@ export let requirementDiagramElements: IMermaidElement[] = [
 	},
 	{
 		id: crypto.randomUUID(),
-		category: ElementCategory.RequirementDiagram,
+		categoryId: "requirementDiagram",
 		description: "sample requirements diagram",
 		content: `designConstraint myReq3 {
             id: reqId
