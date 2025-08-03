@@ -138,6 +138,37 @@ function createIntegratedCategorySection(containerEl: HTMLElement, plugin: Merma
         categoryControls.style.display = "flex";
         categoryControls.style.gap = "2px";
 
+        // Add element button for this category
+        const addElementButton = categoryControls.createEl("button");
+        addElementButton.title = "Add element to this category";
+        addElementButton.style.background = "none";
+        addElementButton.style.border = "none";
+        addElementButton.style.cursor = "pointer";
+        addElementButton.style.padding = "4px";
+        addElementButton.style.display = "flex";
+        addElementButton.style.alignItems = "center";
+        addElementButton.style.borderRadius = "3px";
+        addElementButton.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"></path></svg>`;
+        addElementButton.onmouseenter = () => addElementButton.style.backgroundColor = "var(--background-modifier-hover)";
+        addElementButton.onmouseleave = () => addElementButton.style.backgroundColor = "transparent";
+        addElementButton.onclick = (e) => {
+            e.stopPropagation();
+            const newElement: IMermaidElement = { 
+                id: crypto.randomUUID(),
+                description: "New element",
+                content: `flowchart TD\nStart --> Stop`,
+                categoryId: category.id, // Use the current category's ID
+                sortingOrder: plugin.settings.elements.filter(el => el.categoryId === category.id).length,
+                isPinned: false
+            };
+
+            const modal = new EditMermaidElementModal(plugin.app, plugin, mermaid, newElement, categoryService);
+            modal.open();
+            modal.onClose = () => {  
+                renderSettings(containerEl, plugin);
+            }
+        };
+
         // Move up button
         const moveUpButton = categoryControls.createEl("button");
         moveUpButton.title = "Move category up";
