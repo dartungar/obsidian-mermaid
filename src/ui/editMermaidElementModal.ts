@@ -2,6 +2,7 @@ import MermaidPlugin from "main";
 import { App, Modal, loadMermaid } from "obsidian";
 import { IMermaidElement } from "src/core/IMermaidElement";
 import { CategoryService } from "src/core/categoryService";
+import { setMermaidSvgContent } from "./renderMermaidSvg";
 
 export class EditMermaidElementModal extends Modal {
     constructor(
@@ -61,7 +62,7 @@ export class EditMermaidElementModal extends Modal {
         elementContentEl.onchange = async (e: any) => { 
             this._element.content = elementContentEl.value;
             const {svg} = await this._mermaid.render(renderEl.id, this._plugin._mermaidElementService.wrapAsCompleteDiagram(this._element));
-            renderEl.innerHTML = svg;
+            setMermaidSvgContent(renderEl, svg);
             renderContainerEl.appendChild(renderEl);
         }
 
@@ -72,7 +73,7 @@ export class EditMermaidElementModal extends Modal {
         }
 
         const {svg} = await this._mermaid.render(renderEl.id, this._plugin._mermaidElementService.wrapAsCompleteDiagram(this._element));
-        renderEl.innerHTML = svg;
+        setMermaidSvgContent(renderEl, svg);
         renderContainerEl.appendChild(renderEl);
     }
 

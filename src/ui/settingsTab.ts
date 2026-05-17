@@ -1,5 +1,5 @@
 import MermaidPlugin from "main";
-import { App, PluginSettingTab, Setting, loadMermaid } from "obsidian";
+import { App, PluginSettingTab, Setting, loadMermaid, setIcon } from "obsidian";
 import { IMermaidElement } from "src/core/IMermaidElement";
 import { EditMermaidElementModal } from "./editMermaidElementModal";
 import { EditCategoryModal } from "./editCategoryModal";
@@ -119,7 +119,7 @@ function createIntegratedCategorySection(containerEl: HTMLElement, plugin: Merma
         categoryTitle.style.gap = "10px";
 
         const expandIcon = categoryTitle.createSpan();
-        expandIcon.innerHTML = "▼";
+        expandIcon.setText("▼");
         expandIcon.style.fontSize = "12px";
         expandIcon.style.transition = "transform 0.2s";
 
@@ -148,7 +148,7 @@ function createIntegratedCategorySection(containerEl: HTMLElement, plugin: Merma
         addElementButton.style.display = "flex";
         addElementButton.style.alignItems = "center";
         addElementButton.style.borderRadius = "3px";
-        addElementButton.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14m-7-7h14"></path></svg>`;
+        setIcon(addElementButton, "plus");
         addElementButton.onmouseenter = () => addElementButton.style.backgroundColor = "var(--background-modifier-hover)";
         addElementButton.onmouseleave = () => addElementButton.style.backgroundColor = "transparent";
         addElementButton.onclick = (e) => {
@@ -179,7 +179,7 @@ function createIntegratedCategorySection(containerEl: HTMLElement, plugin: Merma
         moveUpButton.style.display = "flex";
         moveUpButton.style.alignItems = "center";
         moveUpButton.style.borderRadius = "3px";
-        moveUpButton.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18,15 12,9 6,15"></polyline></svg>`;
+        setIcon(moveUpButton, "arrow-up");
         moveUpButton.onmouseenter = () => moveUpButton.style.backgroundColor = "var(--background-modifier-hover)";
         moveUpButton.onmouseleave = () => moveUpButton.style.backgroundColor = "transparent";
         moveUpButton.onclick = (e) => {
@@ -212,7 +212,7 @@ function createIntegratedCategorySection(containerEl: HTMLElement, plugin: Merma
         moveDownButton.style.display = "flex";
         moveDownButton.style.alignItems = "center";
         moveDownButton.style.borderRadius = "3px";
-        moveDownButton.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>`;
+        setIcon(moveDownButton, "arrow-down");
         moveDownButton.onmouseenter = () => moveDownButton.style.backgroundColor = "var(--background-modifier-hover)";
         moveDownButton.onmouseleave = () => moveDownButton.style.backgroundColor = "transparent";
         moveDownButton.onclick = (e) => {
@@ -244,7 +244,7 @@ function createIntegratedCategorySection(containerEl: HTMLElement, plugin: Merma
         editButton.style.display = "flex";
         editButton.style.alignItems = "center";
         editButton.style.borderRadius = "3px";
-        editButton.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="m18.5 2.5 a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>`;
+        setIcon(editButton, "edit");
         editButton.onmouseenter = () => editButton.style.backgroundColor = "var(--background-modifier-hover)";
         editButton.onmouseleave = () => editButton.style.backgroundColor = "transparent";
         editButton.onclick = (e) => {
@@ -271,7 +271,7 @@ function createIntegratedCategorySection(containerEl: HTMLElement, plugin: Merma
         deleteButton.style.display = "flex";
         deleteButton.style.alignItems = "center";
         deleteButton.style.borderRadius = "3px";
-        deleteButton.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"></polyline><path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path></svg>`;
+        setIcon(deleteButton, "trash-2");
         deleteButton.onmouseenter = () => deleteButton.style.backgroundColor = "var(--background-modifier-hover)";
         deleteButton.onmouseleave = () => deleteButton.style.backgroundColor = "transparent";
         deleteButton.onclick = (e) => {

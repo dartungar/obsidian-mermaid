@@ -3,6 +3,7 @@ import { CategoryService } from "src/core/categoryService";
 import { ButtonComponent, DropdownComponent, loadMermaid } from "obsidian";
 import { MermaidElementService } from "src/core/elementService";
 import { MermaidToolbarButton } from "./mermaidToolbarButtons";
+import { setMermaidSvgContent } from "../renderMermaidSvg";
 
 export const TOOLBAR_ELEMENT_CLASS_NAME = "mermaid-toolbar-element";
 export const TOOLBAR_ELEMENTS_CONTAINER_CLASS_NAME = "mermaid-toolbar-elements-container";
@@ -73,7 +74,7 @@ async function recreateElementsSection(
     onElClick: (elementContent: string) => void,
     categoryService: CategoryService) 
 {
-        sectionContainer.innerHTML = '';
+        sectionContainer.empty();
         const elemService = new MermaidElementService();
         const mermaid = await loadMermaid();
 
@@ -86,7 +87,7 @@ async function recreateElementsSection(
             console.log(mermaid.detectType(diagram));
             const {svg} = await mermaid.render(el.id, diagram);
             el.title = elem.description;
-            el.innerHTML = svg;
+            setMermaidSvgContent(el, svg);
             el.onclick = (e) => onElClick(elem.content);
             sectionContainer.appendChild(el);
         }); 
