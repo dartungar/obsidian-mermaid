@@ -1,7 +1,7 @@
 
 import { IMermaidElement } from "src/core/IMermaidElement";
 
-export let ganttChartElements: IMermaidElement[] = [
+export const ganttChartElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
 		categoryId: "ganttChart",

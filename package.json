@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-mermaid",
-	"version": "1.0.0",
+	"version": "1.3.0",
 	"description": "Obsidian Mermaid plugin",
 	"main": "main.js",
 	"scripts": {

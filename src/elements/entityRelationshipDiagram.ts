@@ -1,7 +1,7 @@
 
 import { IMermaidElement } from "src/core/IMermaidElement";
 
-export let entityRelationshipDiagramElements: IMermaidElement[] = [
+export const entityRelationshipDiagramElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
 		categoryId: "entityRelationshipDiagram",

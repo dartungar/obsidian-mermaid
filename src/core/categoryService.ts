@@ -50,10 +50,17 @@ export class CategoryService {
         this.categories = this.categories.filter(cat => cat.id !== id);
     }
 
-    public loadCategories(customCategories: IElementCategory[], defaultCategorySortOrders: { [categoryId: string]: number } = {}): void {
+    public loadCategories(
+        customCategories: IElementCategory[] = [],
+        defaultCategorySortOrders: { [categoryId: string]: number } = {},
+        categoryModifications: { [categoryId: string]: Partial<IElementCategory> } = {}
+    ): void {
         // Create default categories with potentially modified sort orders
         const defaultCategories = DEFAULT_CATEGORIES.map(cat => ({
             ...cat,
+            ...categoryModifications[cat.id],
+            id: cat.id,
+            isCustom: false,
             sortOrder: defaultCategorySortOrders[cat.id] !== undefined ? defaultCategorySortOrders[cat.id] : cat.sortOrder
         }));
         

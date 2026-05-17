@@ -1,5 +1,4 @@
-import MermaidPlugin from "main";
-import { App, Modal, Setting } from "obsidian";
+import { App, Modal, Notice, Setting } from "obsidian";
 import { IElementCategory } from "src/core/IElementCategory";
 import { CategoryService } from "src/core/categoryService";
 
@@ -7,13 +6,12 @@ export class EditCategoryModal extends Modal {
     private category: IElementCategory;
     private isNewCategory: boolean;
     private categoryService: CategoryService;
-    private onSave: (category: IElementCategory) => void;
+    private onSave: (category: IElementCategory) => Promise<void> | void;
 
     constructor(
         app: App, 
-        private plugin: MermaidPlugin, 
         existingCategory: IElementCategory | null, 
-        onSave: (category: IElementCategory) => void
+        onSave: (category: IElementCategory) => Promise<void> | void
     ) {
         super(app);
         this.categoryService = CategoryService.getInstance();
@@ -45,14 +43,18 @@ export class EditCategoryModal extends Modal {
         // Category ID
         new Setting(contentEl)
             .setName('Category ID')
-            .setDesc('Unique identifier for this category (lowercase, no spaces)')
-            .addText(text => text
-                .setPlaceholder('my-custom-category')
-                .setValue(this.category.id)
-                .onChange((value) => {
-                    this.category.id = value.toLowerCase().replace(/\s+/g, '-');
-                })
-            );
+            .setDesc(this.isNewCategory
+                ? 'Unique identifier for this category (lowercase, no spaces)'
+                : 'Category IDs cannot be changed after creation')
+            .addText(text => {
+                text
+                    .setPlaceholder('my-custom-category')
+                    .setValue(this.category.id)
+                    .setDisabled(!this.isNewCategory)
+                    .onChange((value) => {
+                        this.category.id = value.toLowerCase().replace(/\s+/g, '-');
+                    });
+            });
 
         // Category Name
         new Setting(contentEl)
@@ -102,7 +104,7 @@ export class EditCategoryModal extends Modal {
                 .setPlaceholder('0')
                 .setValue(this.category.sortOrder.toString())
                 .onChange((value) => {
-                    const num = parseInt(value);
+                    const num = parseInt(value, 10);
                     if (!isNaN(num)) {
                         this.category.sortOrder = num;
                     }
@@ -110,11 +112,7 @@ export class EditCategoryModal extends Modal {
             );
 
         // Buttons
-        const buttonContainer = contentEl.createDiv('modal-button-container');
-        buttonContainer.style.display = 'flex';
-        buttonContainer.style.justifyContent = 'flex-end';
-        buttonContainer.style.gap = '10px';
-        buttonContainer.style.marginTop = '20px';
+        const buttonContainer = contentEl.createDiv('mermaid-tools-modal-button-container');
 
         const cancelButton = buttonContainer.createEl('button', { text: 'Cancel' });
         cancelButton.onclick = () => this.close();
@@ -123,24 +121,25 @@ export class EditCategoryModal extends Modal {
             text: this.isNewCategory ? 'Create' : 'Save',
             cls: 'mod-cta'
         });
-        saveButton.onclick = () => this.save();
+        saveButton.onclick = () => {
+            void this.save();
+        };
     }
 
-    private save() {
+    private async save(): Promise<void> {
         // Validation
         if (!this.category.id.trim()) {
-            // Simple alert since we don't have access to Notice class
-            alert('Category ID is required');
+            new Notice('Category ID is required');
             return;
         }
 
         if (!this.category.name.trim()) {
-            alert('Category name is required');
+            new Notice('Category name is required');
             return;
         }
 
         if (!this.category.defaultWrapping.trim()) {
-            alert('Default wrapping is required');
+            new Notice('Default wrapping is required');
             return;
         }
 
@@ -154,26 +153,24 @@ export class EditCategoryModal extends Modal {
 
         const wrapping = this.category.defaultWrapping.trim().split(/\s+/)[0];
         if (!commonDiagramTypes.includes(wrapping)) {
-            const shouldContinue = confirm(
-                `Warning: "${wrapping}" is not a recognized Mermaid diagram type. ` +
-                `This may cause rendering errors. Are you sure you want to continue?`
-            );
-            if (!shouldContinue) {
-                return;
-            }
+            new Notice(`"${wrapping}" is not a recognized Mermaid diagram type. The category will still be saved.`);
         }
 
         // Check for duplicate ID (only for new categories)
         if (this.isNewCategory && this.categoryService.getCategoryById(this.category.id)) {
-            alert(`A category with ID '${this.category.id}' already exists`);
+            new Notice(`A category with ID '${this.category.id}' already exists`);
             return;
         }
 
         try {
-            this.onSave(this.category);
+            await this.onSave(this.category);
             this.close();
         } catch (error) {
-            alert(`Error saving category: ${error.message}`);
+            new Notice(`Error saving category: ${getErrorMessage(error)}`);
         }
     }
+}
+
+function getErrorMessage(error: unknown): string {
+    return error instanceof Error ? error.message : String(error);
 }

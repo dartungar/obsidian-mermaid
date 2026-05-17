@@ -11,7 +11,7 @@ export class NoActiveCursorError extends Error {
 export class TextEditorService {
     private _elementService = new MermaidElementService();
 
-    public insertTextAtCursor(editor: Editor, content: string): void {
+    public insertTextAtCursor(editor: Editor | null | undefined, content: string): void {
         if (!editor) 
             throw new NoActiveCursorError();
         content = this._elementService.wrapForPastingIntoEditor(content);

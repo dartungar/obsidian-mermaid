@@ -1,7 +1,7 @@
 
 import { IMermaidElement } from "src/core/IMermaidElement";
 
-export let c4DiagramElements: IMermaidElement[] = [
+export const c4DiagramElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
 		categoryId: "c4Diagram",

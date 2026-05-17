@@ -8,6 +8,7 @@ export class MermaidPluginSettings {
     selectedCategoryId: string;
     defaultCategorySortOrders: { [categoryId: string]: number };
     categoryModifications: { [categoryId: string]: Partial<IElementCategory> };
+    defaultElementCategoryIds: string[];
 
     public static DefaultSettings() {
         const settings = new MermaidPluginSettings();
@@ -16,6 +17,7 @@ export class MermaidPluginSettings {
         settings.selectedCategoryId = "flowchart"; // Default to flowchart category ID
         settings.defaultCategorySortOrders = {};
         settings.categoryModifications = {};
+        settings.defaultElementCategoryIds = Array.from(new Set(defaultElements.map(element => element.categoryId)));
         return settings;
     }
 

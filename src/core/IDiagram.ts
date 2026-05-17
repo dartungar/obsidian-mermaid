@@ -1,3 +1,1 @@
-export interface IDiagram {
-    
-}
+export type IDiagram = Record<string, never>;
