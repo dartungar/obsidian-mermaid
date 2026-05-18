@@ -1,19 +1,11 @@
 import { TRIDENT_ICON_NAME } from "main"
-import { addIcon, sanitizeHTMLToDom } from "obsidian"
+import { addIcon } from "obsidian"
 
 export function addTridentIcon(): void {
-	addIcon(TRIDENT_ICON_NAME, getSanitizedSvg())
-};
-
-function getSanitizedSvg(): string {
-	// a hack to get DocumentFragment as a string
-	var sanitized = sanitizeHTMLToDom(tridentIcon);
-	var tempContainer = createDiv();
-	tempContainer.appendChild(sanitized);
-	return tempContainer.innerHTML;
+	addIcon(TRIDENT_ICON_NAME, TRIDENT_ICON)
 }
 
-var tridentIcon = `<svg width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+const TRIDENT_ICON = `<svg width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M63.3876 30.1639C62.8776 29.6541 62.1414 29.4434 61.439 29.6051L46.6574 32.5601C45.9179 
 32.7318 45.3279 33.2907 45.1192 34.0208C44.9089 34.7506 45.113 35.5373 45.6499 36.0742L47.1282 
 37.552L36.7814 47.895C35.965 48.7111 34.6415 48.7111 33.8252 47.895L29.3908 43.4622L50.0846 22.7759L51.5629 
@@ -35,4 +27,3 @@ var tridentIcon = `<svg width="100" height="100" viewBox="0 0 64 64" fill="none"
 18.5378L50.0853 16.8659L23.4786 43.462L30.8692 50.8499C33.3184 53.2979 37.289 53.2979 39.738 50.8499L53.0412 37.5516L51.3678 
 35.8786L59.246 34.3042L57.6701 42.1787Z" fill="currentColor"/>
 </svg>`;
-

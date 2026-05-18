@@ -1,7 +1,7 @@
 
 import { IMermaidElement } from "src/core/IMermaidElement";
 
-export let requirementDiagramElements: IMermaidElement[] = [
+export const requirementDiagramElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
 		categoryId: "requirementDiagram",

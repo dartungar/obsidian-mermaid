@@ -1,5 +1,5 @@
 import { IMermaidElement } from "src/core/IMermaidElement";
-export let sequenceDiagramElements: IMermaidElement[] = [
+export const sequenceDiagramElements: IMermaidElement[] = [
 	// sequence diagram
 	{
 		id: crypto.randomUUID(),

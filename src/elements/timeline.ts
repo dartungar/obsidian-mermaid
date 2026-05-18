@@ -1,7 +1,7 @@
 
 import { IMermaidElement } from "src/core/IMermaidElement";
 
-export let timelineElements: IMermaidElement[] = [
+export const timelineElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
 		categoryId: "timeline",

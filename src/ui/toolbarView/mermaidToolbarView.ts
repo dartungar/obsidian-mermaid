@@ -6,6 +6,15 @@ import { createMermaidToolbar } from "./viewHelpers";
 import { IMermaidElement } from "src/core/IMermaidElement";
 import { MermaidToolbarButton } from "./mermaidToolbarButtons";
 
+interface SettingsApi {
+    open(): void;
+    openTabById(id: string): void;
+}
+
+interface AppWithSettings {
+    setting?: SettingsApi;
+}
+
 export class MermaidToolbarView extends ItemView {
     static readonly VIEW_TYPE = "mermaid-toolbar-view"; 
     static readonly VIEW_DESCRIPTION = "Mermaid Toolbar";
@@ -25,14 +34,15 @@ export class MermaidToolbarView extends ItemView {
         new MermaidToolbarButton(
             "open Mermaid.js documentation web page",
             "external-link",
-            () => window.open("https://mermaid.js.org/intro/")
+            () => window.open("https://mermaid.js.org/intro/", "_blank", "noopener")
         ),
         new MermaidToolbarButton(
             "open settings",
             "settings",
             () => {
-                (this.app as any).setting.open();
-                (this.app as any).setting.openTabById("mermaid-tools");
+                const settings = (this.app as AppWithSettings).setting;
+                settings?.open();
+                settings?.openTabById("mermaid-tools");
             }
         )
     ]
@@ -43,7 +53,10 @@ export class MermaidToolbarView extends ItemView {
         this.items = plugin.settings.elements;
         this.categoryService = CategoryService.getInstance();
         // Load custom categories
-        this.categoryService.loadCategories(plugin.settings.customCategories, plugin.settings.defaultCategorySortOrders);
+        this.categoryService.loadCategories(
+            plugin.settings.customCategories,
+            plugin.settings.defaultCategorySortOrders,
+            plugin.settings.categoryModifications);
         this.containerEl.children[1].addClass("mermaid-toolbar-container");
     }
 
@@ -56,6 +69,12 @@ export class MermaidToolbarView extends ItemView {
     }
 
     async recreateToolbar(selectedCategoryId: string): Promise<void> {
+        this.items = this._plugin.settings.elements;
+        this.categoryService.loadCategories(
+            this._plugin.settings.customCategories,
+            this._plugin.settings.defaultCategorySortOrders,
+            this._plugin.settings.categoryModifications);
+
         const container = this.containerEl.children[1];
         container.empty();
 
@@ -63,10 +82,9 @@ export class MermaidToolbarView extends ItemView {
             this.topRowButtons,
             this.items, 
             selectedCategoryId,
-            async (newCategoryId) => {
+            (newCategoryId) => {
                 this._plugin.settings.selectedCategoryId = newCategoryId;
-                this._plugin.saveSettings();
-                await this.recreateToolbar(this._plugin.settings.selectedCategoryId);
+                void this._plugin.saveSettings({ refreshToolbar: false });
             },
             text => this.insertTextAtCursor(text),
             this.categoryService);
@@ -90,4 +108,3 @@ export class MermaidToolbarView extends ItemView {
 
 
 }
-

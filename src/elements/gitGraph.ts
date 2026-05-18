@@ -1,7 +1,7 @@
 
 import { IMermaidElement } from "src/core/IMermaidElement";
 
-export let gitGraphElements: IMermaidElement[] = [
+export const gitGraphElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
 		categoryId: "gitGraph",

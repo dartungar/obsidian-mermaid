@@ -15,11 +15,16 @@ export class MermaidElementService {
         return defaultElements;
     }
 
-    public saveElement(element: IMermaidElement, plugin: MermaidPlugin): void {
+    public async saveElement(element: IMermaidElement, plugin: MermaidPlugin): Promise<void> {
 
-        const elementExists = plugin.settings.elements.some(el => el.id === element.id);
+        const existingElement = plugin.settings.elements.find(el => el.id === element.id);
+        const elementExists = existingElement !== undefined;
 
         if (elementExists) {
+            if (existingElement.categoryId !== element.categoryId) {
+                this.fixSortOrder(element, plugin);
+            }
+
             const index = plugin.settings.elements.findIndex(el => el.id === element.id);
             if (index !== -1) {
                 plugin.settings.elements[index] = element;
@@ -30,7 +35,7 @@ export class MermaidElementService {
             plugin.settings.elements.push(element);
         }
 
-        plugin.saveSettings();       
+        await plugin.saveSettings();       
     }
 
     public fixSortOrder(element: IMermaidElement, plugin: MermaidPlugin) {
@@ -44,7 +49,6 @@ export class MermaidElementService {
         // Try to get sample diagram by category ID, fallback to category name for backward compatibility
         const category = this.categoryService.getCategoryById(categoryId);
         if (!category) {
-            console.warn(`[Mermaid Tools] No category found for ID: ${categoryId}, using default sample`);
             return this.wrapForPastingIntoEditor(this.wrapWithMermaidBlock("flowchart TD\nStart --> End"));
         }
         
@@ -54,7 +58,6 @@ export class MermaidElementService {
             return this.wrapForPastingIntoEditor(this.wrapWithMermaidBlock(sample));
         }
         
-        console.warn(`[Mermaid Tools] No sample diagram found for category: ${category.name}, using default sample`);
         // Default sample
         return this.wrapForPastingIntoEditor(this.wrapWithMermaidBlock("flowchart TD\nStart --> End"));
     }
@@ -70,14 +73,13 @@ export class MermaidElementService {
     public wrapAsCompleteDiagram(element: IMermaidElement): string {
         const wrapping = this.categoryService.getWrappingData(element.categoryId);
         if (!wrapping) {
-            console.warn(`[Mermaid Tools] No wrapping data found for category: ${element.categoryId}`);
             return element.content;
         }
         
         // Check if content already contains the wrapping
-        const contentAlreadyWrapped = wrapping.wrappings 
-                ? wrapping.wrappings.some(w => element.content.contains(w)) 
-                : element.content.contains(wrapping.defaultWrapping);
+        const contentAlreadyWrapped = wrapping.wrappings
+                ? wrapping.wrappings.some(w => element.content.includes(w))
+                : element.content.includes(wrapping.defaultWrapping);
                 
         if (contentAlreadyWrapped) {
             return element.content;
@@ -85,19 +87,6 @@ export class MermaidElementService {
         
         // Add the default wrapping
         const wrappedContent = wrapping.defaultWrapping + "\n" + element.content;
-        
-        // Log a warning if the wrapping might be invalid
-        const firstWord = wrapping.defaultWrapping.trim().split(/\s+/)[0];
-        const validDiagramTypes = [
-            'flowchart', 'graph', 'sequenceDiagram', 'classDiagram', 'stateDiagram-v2', 
-            'erDiagram', 'journey', 'gantt', 'pie', 'requirementDiagram', 'gitGraph',
-            'mindmap', 'timeline', 'quadrantChart', 'C4Context', 'sankey-beta', 
-            'xychart-beta', 'packet-beta', 'kanban', 'block-beta', 'architecture-beta'
-        ];
-        
-        if (!validDiagramTypes.includes(firstWord)) {
-            console.warn(`[Mermaid Tools] Potentially invalid diagram type "${firstWord}" in category ${element.categoryId}. This may cause rendering errors.`);
-        }
         
         return wrappedContent;
     }

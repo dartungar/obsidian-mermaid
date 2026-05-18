@@ -1,7 +1,7 @@
 
 import { IMermaidElement } from "src/core/IMermaidElement";
 
-export let mindMapElements: IMermaidElement[] = [
+export const mindMapElements: IMermaidElement[] = [
 	{
 		id: crypto.randomUUID(),
 		categoryId: "mindmap",

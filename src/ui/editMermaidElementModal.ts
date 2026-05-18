@@ -2,16 +2,21 @@ import MermaidPlugin from "main";
 import { App, Modal, loadMermaid } from "obsidian";
 import { IMermaidElement } from "src/core/IMermaidElement";
 import { CategoryService } from "src/core/categoryService";
+import { MermaidRenderer } from "src/core/mermaidRenderer";
+import { setMermaidSvgContent } from "./renderMermaidSvg";
 
 export class EditMermaidElementModal extends Modal {
+    private _element: IMermaidElement;
+
     constructor(
         app: App, 
         private _plugin: MermaidPlugin, 
-        private _mermaid: any, // Mermaid instance type
-        public _element: IMermaidElement,
+        private _mermaid: MermaidRenderer | null,
+        element: IMermaidElement,
         private _categoryService: CategoryService
     ) {
         super(app);
+        this._element = { ...element };
     }
         
     // TODO: styling
@@ -21,12 +26,16 @@ export class EditMermaidElementModal extends Modal {
         contentEl.createEl('h2', { text: "Edit element" });
 
         const renderContainerEl = contentEl.createDiv();
-        const renderEl = renderContainerEl.createEl("pre", {text: "rendered diagram"});
+        const renderEl = renderContainerEl.createDiv({ text: "rendered diagram" });
+        renderEl.addClass("mermaid-tools-element-preview");
 
-        if (!this._mermaid)
+        if (!this._mermaid) {
             this._mermaid = await loadMermaid();
-
-        renderEl.id = "mermaid-edit-element-modal"
+        }
+        const mermaid = this._mermaid;
+        if (!mermaid) {
+            throw new Error("Unable to load Mermaid renderer.");
+        }
 
         // dropdown element
         const elementCategoryContainerEl = contentEl.createDiv();
@@ -39,16 +48,17 @@ export class EditMermaidElementModal extends Modal {
             option.value = category.id;
         }
         elementCategoryEl.value = this._element.categoryId;
-        elementCategoryEl.onchange = (e) => {
+        elementCategoryEl.onchange = async () => {
             this._element.categoryId = elementCategoryEl.value;
+            await this.renderPreview(mermaid, renderEl);
         }
 
         // text input
         const elementDescriptionContainerEl = contentEl.createDiv();
         elementDescriptionContainerEl.createEl("label", {text: "Description"});
         const elementDescriptionEl = elementDescriptionContainerEl.createEl("input", {value: this._element.description, type: "text"});
-        elementDescriptionEl.style.minWidth = "50%";
-        elementDescriptionEl.onchange = (e) => { 
+        elementDescriptionEl.addClass("mermaid-tools-element-description-input");
+        elementDescriptionEl.onchange = () => { 
             this._element.description = elementDescriptionEl.value; 
         }
 
@@ -56,29 +66,46 @@ export class EditMermaidElementModal extends Modal {
         const elementContentContainerEl = contentEl.createDiv();
         elementContentContainerEl.createEl("label", {text: "Content"});
         const elementContentEl = elementContentContainerEl.createEl("textarea", {text: this._element.content});
-        elementContentEl.style.height = "200px";
-        elementContentEl.style.width = "100%";
-        elementContentEl.onchange = async (e: any) => { 
+        elementContentEl.addClass("mermaid-tools-element-content-input");
+        elementContentEl.onchange = async () => { 
             this._element.content = elementContentEl.value;
-            const {svg} = await this._mermaid.render(renderEl.id, this._plugin._mermaidElementService.wrapAsCompleteDiagram(this._element));
-            renderEl.innerHTML = svg;
-            renderContainerEl.appendChild(renderEl);
+            await this.renderPreview(mermaid, renderEl);
         }
 
         // save button
         const saveButtonEl = contentEl.createEl("button", {text: "Save"});
-        saveButtonEl.onclick = (e) => { 
-            this.save();
+        saveButtonEl.onclick = () => { 
+            void this.save();
         }
 
-        const {svg} = await this._mermaid.render(renderEl.id, this._plugin._mermaidElementService.wrapAsCompleteDiagram(this._element));
-        renderEl.innerHTML = svg;
-        renderContainerEl.appendChild(renderEl);
+        await this.renderPreview(mermaid, renderEl);
     }
 
-    save() {
-        this._plugin._mermaidElementService.saveElement(this._element, this._plugin);
+    async save(): Promise<void> {
+        await this._plugin._mermaidElementService.saveElement(this._element, this._plugin);
         this.close();
     }
+
+    private async renderPreview(mermaid: MermaidRenderer, renderEl: HTMLElement): Promise<void> {
+        try {
+            const { svg } = await mermaid.render(createMermaidPreviewId(), this._plugin._mermaidElementService.wrapAsCompleteDiagram(this._element));
+            renderEl.removeClass("mermaid-tools-render-error");
+            setMermaidSvgContent(renderEl, svg);
+        } catch (error) {
+            renderEl.empty();
+            renderEl.addClass("mermaid-tools-render-error");
+            renderEl.createDiv({ text: "Unable to render preview" });
+            const errorEl = renderEl.createDiv({ text: getErrorMessage(error) });
+            errorEl.addClass("mermaid-tools-render-error-message");
+        }
+    }
     
+}
+
+function getErrorMessage(error: unknown): string {
+    return error instanceof Error ? error.message : String(error);
+}
+
+function createMermaidPreviewId(): string {
+    return `mermaid-tools-edit-preview-${crypto.randomUUID()}`;
 }
