@@ -2,7 +2,7 @@ import { IMermaidElement } from "src/core/IMermaidElement";
 import { CategoryService } from "src/core/categoryService";
 import { ButtonComponent, DropdownComponent, loadMermaid } from "obsidian";
 import { MermaidElementService } from "src/core/elementService";
-import { MermaidRenderer } from "src/core/mermaidRenderer";
+import { MermaidRenderer, renderMermaidPreview } from "src/core/mermaidRenderer";
 import { MermaidToolbarButton } from "./mermaidToolbarButtons";
 import { setMermaidSvgContent } from "../renderMermaidSvg";
 
@@ -16,8 +16,9 @@ export async function createMermaidToolbar(
     selectedCategoryId: string,
     onCategoryChanged: (newCategoryId: string) => Promise<void> | void, 
     onElementClick: (elementContent: string) => void,
-    categoryService: CategoryService): Promise<HTMLElement> {
-        const container = document.createElement('div');
+    categoryService: CategoryService,
+    doc: Document): Promise<HTMLElement> {
+        const container = doc.createElement('div');
         // dropdown
         const topRow = container.createDiv();
         topRow.addClass("mermaid-toolbar-top-row");
@@ -96,7 +97,7 @@ async function recreateElementsSection(
             const diagram = elemService.wrapAsCompleteDiagram(elem);
             el.title = elem.description;
             try {
-                const {svg} = await mermaid.render(createMermaidPreviewId(), diagram);
+                const {svg} = await renderMermaidPreview(mermaid, createMermaidPreviewId(), diagram, sectionContainer.ownerDocument);
                 setMermaidSvgContent(el, svg);
             } catch (error) {
                 renderToolbarElementError(el, elem.description, error);
