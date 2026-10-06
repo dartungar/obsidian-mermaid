@@ -18,7 +18,8 @@ export async function createMermaidToolbar(
     onElementClick: (elementContent: string) => void,
     categoryService: CategoryService,
     doc: Document): Promise<HTMLElement> {
-        const container = doc.createElement('div');
+        const container = doc.body.createDiv();
+        container.detach();
         // dropdown
         const topRow = container.createDiv();
         topRow.addClass("mermaid-toolbar-top-row");
@@ -37,8 +38,7 @@ export async function createMermaidToolbar(
 
 function createTopRowBtns(parentEl: HTMLDivElement, buttons: MermaidToolbarButton[]) {
     buttons.forEach(btn => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const b = new ButtonComponent(parentEl)
+        new ButtonComponent(parentEl)
                 .setClass("clickable-icon")
                 .setIcon(btn.iconName)
                 .setTooltip(btn.tooltip)

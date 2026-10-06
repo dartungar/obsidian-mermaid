@@ -31,7 +31,7 @@ function parseSanitizedSvg(svg: string): SVGSVGElement {
     }
 
     sanitizeSvgTree(svgEl);
-    return document.importNode(svgEl, true) as SVGSVGElement;
+    return document.importNode(svgEl, true);
 }
 
 function sanitizeSvgTree(rootEl: Element): void {

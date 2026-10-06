@@ -258,3 +258,7 @@
 .mermaid-tools-modal-button-container button.mod-cta:hover {
     background-color: var(--color-accent-hover);
 }
+
+.mermaid-tools-settings-management {
+    display: block;
+}

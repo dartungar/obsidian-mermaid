@@ -1,5 +1,5 @@
 import MermaidPlugin from "main";
-import { App, Modal, loadMermaid } from "obsidian";
+import { App, Modal, Notice, loadMermaid } from "obsidian";
 import { IMermaidElement } from "src/core/IMermaidElement";
 import { CategoryService } from "src/core/categoryService";
 import { MermaidRenderer } from "src/core/mermaidRenderer";
@@ -19,8 +19,13 @@ export class EditMermaidElementModal extends Modal {
         this._element = { ...element };
     }
         
-    // TODO: styling
-    async onOpen() {
+    onOpen(): void {
+        void this.renderContent().catch((error: unknown) => {
+            new Notice(`Unable to open element editor: ${getErrorMessage(error)}`);
+        });
+    }
+
+    private async renderContent(): Promise<void> {
         const {contentEl} = this;
         contentEl.addClass("mermaid-tools-edit-element-modal")
         contentEl.createEl('h2', { text: "Edit element" });
@@ -48,9 +53,9 @@ export class EditMermaidElementModal extends Modal {
             option.value = category.id;
         }
         elementCategoryEl.value = this._element.categoryId;
-        elementCategoryEl.onchange = async () => {
+        elementCategoryEl.onchange = () => {
             this._element.categoryId = elementCategoryEl.value;
-            await this.renderPreview(mermaid, renderEl);
+            void this.renderPreview(mermaid, renderEl);
         }
 
         // text input
@@ -67,9 +72,9 @@ export class EditMermaidElementModal extends Modal {
         elementContentContainerEl.createEl("label", {text: "Content"});
         const elementContentEl = elementContentContainerEl.createEl("textarea", {text: this._element.content});
         elementContentEl.addClass("mermaid-tools-element-content-input");
-        elementContentEl.onchange = async () => { 
+        elementContentEl.onchange = () => {
             this._element.content = elementContentEl.value;
-            await this.renderPreview(mermaid, renderEl);
+            void this.renderPreview(mermaid, renderEl);
         }
 
         // save button

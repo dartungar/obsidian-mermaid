@@ -61,10 +61,6 @@ export default class MermaidPlugin extends Plugin {
 		this.addSettingTab(new MermaidToolsSettingsTab(this.app, this));
     }
 
-    async onunload(): Promise<void> {
-        this.app.workspace.detachLeavesOfType(MermaidToolbarView.VIEW_TYPE);
-    }
-
     async loadSettings() {
 		const defaultSettings = MermaidPluginSettings.DefaultSettings();
 		const loadedSettings = await this.loadData();
@@ -139,7 +135,11 @@ export default class MermaidPlugin extends Plugin {
 	}
 
 	async activateView() {
-		this.app.workspace.detachLeavesOfType(MermaidToolbarView.VIEW_TYPE);
+		const existingLeaf = this.app.workspace.getLeavesOfType(MermaidToolbarView.VIEW_TYPE)[0];
+		if (existingLeaf) {
+			await this.app.workspace.revealLeaf(existingLeaf);
+			return;
+		}
 
 		const leaf = this.app.workspace.getRightLeaf(false) ?? this.app.workspace.getLeaf(true);
 		await leaf.setViewState({

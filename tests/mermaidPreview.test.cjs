@@ -50,8 +50,15 @@ function makeElement(doc) {
         addClass() {},
         setAttr() {},
         empty() { this.children = []; },
+        detach() {
+            if (this.parentElement) {
+                this.parentElement.children = this.parentElement.children.filter(child => child !== this);
+                this.parentElement = null;
+            }
+        },
         appendChild(child) {
             if (!this.children.includes(child)) this.children.push(child);
+            child.parentElement = this;
         },
         createDiv() { return this.createEl(); },
         createEl() {
@@ -124,7 +131,13 @@ test("render failures still reach the toolbar's existing error handler", async (
 
 test("sidebar uses its owning document's theme and inserts the original component content", async () => {
     const doc = makeDocument(true);
-    doc.createElement = () => makeElement(doc);
+    doc.body.createDiv = () => {
+        const element = makeElement(doc);
+        doc.body.children.push(element);
+        element.parentElement = doc.body;
+        return element;
+    };
+    doc.body.children = [];
     const mermaid = makeRenderer();
     const inserted = [];
     const { createMermaidToolbar } = loadSource("src/ui/toolbarView/viewHelpers.ts", {
@@ -147,6 +160,8 @@ test("sidebar uses its owning document's theme and inserts the original componen
     const elements = [{ categoryId: "flowchart", sortingOrder: 0, content: "A --> B", description: "Arrow" }];
     const toolbar = await createMermaidToolbar([], elements, "flowchart", () => {},
         text => inserted.push(text), { getCategories: () => [{ id: "flowchart", name: "Flowchart" }] }, doc);
+    assert.equal(toolbar.ownerDocument, doc);
+    assert.equal(doc.body.children.length, 0);
     assert.equal(mermaid.calls[0].diagram, '%%{init: {"theme":"dark"}}%%\nflowchart TD\nA --> B');
     const item = toolbar.children[1].children[0];
     assert.equal(item.svg, "<svg/>");
@@ -234,4 +249,101 @@ test("closing the sidebar discards pending toolbar rendering", async () => {
     renders[0].resolve("closed toolbar");
     await opening;
     assert.deepEqual(content.children, []);
+});
+
+function makePlugin(workspace) {
+    const imports = {
+        obsidian: { Plugin: class { onunload() {} } },
+        "src/core/elementService": { MermaidElementService: class {} },
+        "src/core/textEditorService": { TextEditorService: class {} },
+        "src/settings/settings": {},
+        "src/trident-icon": {},
+        "src/ui/settingsTab": {},
+        "src/ui/toolbarView/mermaidToolbarView": {
+            MermaidToolbarView: { VIEW_TYPE: "mermaid-toolbar-view" },
+        },
+    };
+    for (const name of ["architecture", "blockDiagram", "c4Diagram", "kanban", "mindMap",
+        "packet", "quadrant", "sankeyDiagram", "timeline", "xyChart"]) {
+        imports[`src/elements/${name}`] = {};
+    }
+    const { default: MermaidPlugin } = loadSource("main.ts", imports);
+    const plugin = new MermaidPlugin();
+    plugin.app = { workspace };
+    return plugin;
+}
+
+test("reopening and unloading preserve an existing toolbar leaf's position", async () => {
+    const leaf = { location: "left split" };
+    const revealed = [];
+    const plugin = makePlugin({
+        getLeavesOfType(type) {
+            assert.equal(type, "mermaid-toolbar-view");
+            return [leaf];
+        },
+        async revealLeaf(target) { revealed.push(target); },
+        detachLeavesOfType() { assert.fail("Must preserve existing leaves"); },
+        getRightLeaf() { assert.fail("Must reuse the existing leaf"); },
+    });
+    await plugin.activateView();
+    assert.deepEqual(revealed, [leaf]);
+    assert.equal(plugin.onunload(), undefined);
+    assert.equal(leaf.location, "left split");
+});
+
+test("opening a new toolbar falls back to a new leaf when the sidebar is unavailable", async () => {
+    const states = [];
+    const leaf = { async setViewState(state) { states.push(state); } };
+    let revealed;
+    const plugin = makePlugin({
+        getLeavesOfType: () => [],
+        getRightLeaf: () => null,
+        getLeaf(create) { assert.equal(create, true); return leaf; },
+        async revealLeaf(target) { revealed = target; },
+    });
+    await plugin.activateView();
+    assert.equal(states[0].type, "mermaid-toolbar-view");
+    assert.equal(states[0].active, true);
+    assert.equal(revealed, leaf);
+});
+
+test("searchable and legacy settings render the management UI and handle loading errors", async () => {
+    const notices = [];
+    let failLoading = false;
+    const doc = makeDocument();
+    const { MermaidToolsSettingsTab } = loadSource("src/ui/settingsTab.ts", {
+        obsidian: {
+            PluginSettingTab: class { constructor() { this.containerEl = makeElement(doc); } },
+            Modal: class {},
+            Notice: class { constructor(message) { notices.push(message); } },
+            async loadMermaid() {
+                if (failLoading) throw new Error("Renderer unavailable");
+                return makeRenderer();
+            },
+        },
+        "./editMermaidElementModal": {},
+        "./editCategoryModal": {},
+        "src/core/categoryService": { CategoryService: { getInstance: () => ({
+            loadCategories() {},
+            getCategories: () => [],
+        }) } },
+        "src/core/defaultCategories": { DEFAULT_CATEGORIES: [] },
+    });
+    const tab = new MermaidToolsSettingsTab({}, { settings: {} });
+    const definitions = tab.getSettingDefinitions();
+    assert.ok(definitions.length > 0);
+    assert.match(definitions[0].name, /elements.*categories/i);
+    const settingEl = makeElement(doc);
+    assert.equal(definitions[0].render({ settingEl }), undefined);
+    await new Promise(setImmediate);
+    assert.ok(settingEl.children[0].children.length > 0);
+    assert.equal(tab.display(), undefined);
+    await new Promise(setImmediate);
+    assert.ok(tab.containerEl.children.length > 0);
+    failLoading = true;
+    tab.display();
+    definitions[0].render({ settingEl });
+    await new Promise(setImmediate);
+    assert.equal(notices.length, 2);
+    assert.ok(notices.every(message => message.includes("Renderer unavailable")));
 });

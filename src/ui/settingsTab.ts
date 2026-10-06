@@ -1,6 +1,6 @@
 import MermaidPlugin from "main";
 import { App, Modal, Notice, PluginSettingTab, Setting, loadMermaid, setIcon } from "obsidian";
-import type { IconName } from "obsidian";
+import type { IconName, SettingDefinitionItem } from "obsidian";
 import { IMermaidElement } from "src/core/IMermaidElement";
 import { EditMermaidElementModal } from "./editMermaidElementModal";
 import { EditCategoryModal } from "./editCategoryModal";
@@ -17,12 +17,34 @@ export class MermaidToolsSettingsTab extends PluginSettingTab {
         super(_app, _plugin);
     }
 
-    async display() {
-        await renderSettings(this.containerEl, this._plugin);
+    getSettingDefinitions(): SettingDefinitionItem[] {
+        return [{
+            name: "Manage elements and categories",
+            desc: "Add, edit, duplicate, delete, and reorder Mermaid toolbar elements and diagram categories.",
+            aliases: ["wrapping", "description", "content", "sorting order", "custom categories"],
+            render: (setting) => {
+                setting.settingEl.empty();
+                setting.settingEl.addClass("mermaid-tools-settings-management");
+                const contentEl = setting.settingEl.createDiv();
+                this.renderContent(contentEl);
+            },
+        }];
+    }
+
+    // Obsidian versions before 1.13 use the imperative settings tab.
+    display(): void {
+        this.renderContent(this.containerEl);
+    }
+
+    private renderContent(containerEl: HTMLElement): void {
+        void renderSettings(containerEl, this._plugin).catch((error: unknown) => {
+            new Notice(`Unable to load Mermaid settings: ${getErrorMessage(error)}`);
+        });
     }
 }
 
 async function renderSettings(containerEl: HTMLElement, plugin: MermaidPlugin) {
+    containerEl.addClass("mermaid-tools-settings-content");
     const mermaid: MermaidRenderer = await loadMermaid();
     const categoryService = CategoryService.getInstance();
     
@@ -423,7 +445,7 @@ async function deleteElement(element: IMermaidElement, plugin: MermaidPlugin, pa
 }
 
 async function renderSettingsFromParent(parentEl: HTMLElement, plugin: MermaidPlugin): Promise<void> {
-    const settingsContainer = parentEl.closest('.vertical-tab-content');
+    const settingsContainer = parentEl.closest('.mermaid-tools-settings-content');
     if (settingsContainer instanceof HTMLElement) {
         await renderSettings(settingsContainer, plugin);
     }

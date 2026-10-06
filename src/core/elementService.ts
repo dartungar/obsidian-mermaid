@@ -52,8 +52,7 @@ export class MermaidElementService {
             return this.wrapForPastingIntoEditor(this.wrapWithMermaidBlock("flowchart TD\nStart --> End"));
         }
         
-        const sampleKey = category.name as keyof typeof sampleDiagrams;
-        const sample = sampleDiagrams[sampleKey];
+        const sample = sampleDiagrams[category.name];
         if (sample) {
             return this.wrapForPastingIntoEditor(this.wrapWithMermaidBlock(sample));
         }
